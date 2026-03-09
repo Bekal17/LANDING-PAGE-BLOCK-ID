@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>blockID — Trust Infrastructure for Web3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'ClashDisplay';
+  src: url('https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap');
+  font-weight: 200 700;
+  font-display: swap;
+}
+</style>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --blue:      #38bdf8;
+  --blue-mid:  #0ea5e9;
+  --blue-dark: #0369a1;
+  --purple:    #7c3aed;
+  --purple-mid:#6d28d9;
+  --indigo:    #818cf8;
+  --bg:        #06050f;
+  --bg2:       #0a0818;
+  --surface:   rgba(255,255,255,0.04);
+  --surface2:  rgba(56,189,248,0.06);
+  --border:    rgba(56,189,248,0.1);
+  --border2:   rgba(124,58,237,0.25);
+  --fg:        #f0f8ff;
+  --muted:     #64748b;
+  --muted2:    #94a3b8;
+  --grad:      linear-gradient(135deg,#7c3aed,#0ea5e9);
+  --grad2:     linear-gradient(135deg,#38bdf8,#818cf8);
+  --glow-blue: rgba(56,189,248,0.3);
+  --glow-pur:  rgba(124,58,237,0.3);
+  --fd:        'ClashDisplay',sans-serif;
+  --fm:        'Inter',sans-serif;
+}
+
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--fm);font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+.section{padding:120px 24px;position:relative;z-index:1}
+
+.glass{background:var(--surface);border:1px solid var(--border);border-radius:16px;backdrop-filter:blur(16px)}
+.glass-h{background:var(--surface);border:1px solid var(--border);border-radius:16px;backdrop-filter:blur(16px);transition:background .25s,border-color .25s,transform .25s,box-shadow .25s}
+.glass-h:hover{background:var(--surface2);border-color:rgba(56,189,248,.25);transform:translateY(-4px);box-shadow:0 20px 60px -20px var(--glow-blue)}
+.glow-card{border-color:rgba(56,189,248,.4)!important;box-shadow:0 0 40px -12px var(--glow-blue),inset 0 1px 0 rgba(255,255,255,.05)}
+
+.grad-text{background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;padding:0 24px;background:rgba(6,5,15,.8);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 4px 40px rgba(0,0,0,.6)}
+.nav-in{max-width:1280px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--fd);font-weight:800;font-size:20px;text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo-box{width:32px;height:32px;border-radius:8px;background:var(--grad);display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px -4px var(--glow-pur)}
+.nav-links{display:flex;align-items:center;gap:2px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:4px}
+.nbtn{padding:6px 16px;border-radius:9px;border:none;background:transparent;color:var(--muted2);font-family:var(--fm);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
+.nbtn:hover{color:var(--fg);background:rgba(255,255,255,.06)}
+.nbtn.on{background:rgba(56,189,248,.12);color:var(--blue)}
+.btn-g{display:inline-flex;align-items:center;gap:8px;padding:9px 22px;border-radius:10px;background:var(--grad);color:#fff;font-family:var(--fd);font-weight:700;font-size:13px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 0 28px -8px var(--glow-pur);transition:opacity .2s,box-shadow .2s}
+.btn-g:hover{opacity:.9;box-shadow:0 0 40px -4px var(--glow-blue)}
+.btn-o{display:inline-flex;align-items:center;gap:8px;padding:9px 22px;border-radius:10px;background:transparent;color:var(--muted2);font-family:var(--fd);font-weight:600;font-size:13px;border:1px solid var(--border);cursor:pointer;transition:all .2s;text-decoration:none}
+.btn-o:hover{color:var(--fg);border-color:rgba(56,189,248,.3)}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 24px 0;text-align:center;position:relative;z-index:1}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:100px;margin-bottom:28px;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.3);font-size:12px;color:var(--indigo);font-family:var(--fm)}
+.bdot{width:7px;height:7px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite}
+.h1{font-family:var(--fd);font-weight:700;font-size:clamp(44px,8.5vw,96px);line-height:1.0;letter-spacing:-.03em;margin-bottom:24px}
+.hp{font-size:18px;color:var(--muted2);max-width:580px;margin:0 auto 40px;line-height:1.75}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:56px}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);max-width:540px;margin:0 auto;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--surface)}
+.st{padding:24px 20px;text-align:center;border-right:1px solid var(--border)}
+.st:last-child{border-right:none}
+.sv{font-family:var(--fd);font-size:28px;font-weight:800;background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sl{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:.05em}
+.live-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.18);border-radius:8px;padding:5px 14px;font-size:11px;color:var(--blue);font-family:var(--fm);margin-top:20px}
+.ldot{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:pulse 1.5s infinite}
+
+/* TICKER */
+#ticker-wrap{padding:18px 24px;position:relative;z-index:1;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(56,189,248,.025);overflow:hidden}
+.ticker{display:flex;gap:48px;width:max-content;animation:tick 28s linear infinite}
+.ti{display:flex;align-items:center;gap:10px;white-space:nowrap;font-size:12px;color:var(--muted2)}
+.ti strong{color:var(--blue);font-family:var(--fd)}
+.tsep{color:rgba(56,189,248,.2);font-size:18px}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+.stag{font-family:var(--fm);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
+.sh2{font-family:var(--fd);font-size:clamp(32px,5vw,56px);font-weight:700;letter-spacing:-.03em;margin-bottom:16px}
+.ssub{color:var(--muted2);max-width:500px;margin:0 auto 64px;line-height:1.75;font-size:15px}
+.tc{text-align:center}
+
+/* PRODUCT */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.pc{padding:28px}
+.ibox{width:46px;height:46px;border-radius:12px;background:var(--grad);display:flex;align-items:center;justify-content:center;margin-bottom:18px;box-shadow:0 8px 24px -8px var(--glow-pur)}
+.ch3{font-family:var(--fd);font-weight:700;font-size:17px;margin-bottom:8px}
+.cp{font-size:13px;color:var(--muted2);line-height:1.7}
+
+/* DOCS */
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+@media(max-width:768px){.dgrid{grid-template-columns:1fr}}
+.cblock{background:#050412;border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.chdr{display:flex;align-items:center;gap:8px;padding:12px 18px;border-bottom:1px solid var(--border);background:rgba(255,255,255,.02)}
+.tl{width:12px;height:12px;border-radius:50%}
+.cfn{font-size:11px;color:var(--muted);margin-left:8px;font-family:var(--fm)}
+.cbody{padding:20px;overflow-x:auto}
+pre{font-family:var(--fm);font-size:12.5px;line-height:1.8}
+.ln-row{display:flex}
+.lno{width:30px;text-align:right;margin-right:16px;color:rgba(255,255,255,.12);user-select:none;flex-shrink:0}
+.lc{color:rgba(148,163,184,.4)}.ls{color:#7dd3fc}.lk{color:#c084fc}.lx{color:rgba(240,248,255,.7)}
+.flist{display:flex;flex-direction:column;gap:14px}
+.fcard{padding:20px 22px}
+.fh4{font-family:var(--fd);font-weight:700;font-size:15px;margin-bottom:5px}
+.fp{font-size:13px;color:var(--muted2)}
+
+/* API */
+.acard{overflow:hidden;margin-bottom:20px}
+.ahdr{padding:18px 22px;border-bottom:1px solid var(--border)}
+.arow{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.mget{color:#34d399;font-weight:700;font-size:12px;font-family:var(--fm)}
+.mpost{color:var(--blue);font-weight:700;font-size:12px;font-family:var(--fm)}
+.apath{font-family:var(--fm);font-size:13px;color:rgba(255,255,255,.75)}
+.adesc{font-size:13px;color:var(--muted2)}
+.acode{background:#050412;padding:20px 22px}
+.acode pre{font-size:12px;color:var(--muted2)}
+
+/* ROADMAP */
+.rgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative}
+@media(max-width:900px){.rgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:540px){.rgrid{grid-template-columns:1fr}}
+.rline{position:absolute;top:20px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border),var(--border),transparent)}
+@media(max-width:900px){.rline{display:none}}
+.pdot{width:14px;height:14px;border-radius:50%;margin:0 auto 24px}
+.d-done{background:var(--blue);box-shadow:0 0 14px var(--glow-blue)}
+.d-act{background:var(--purple);box-shadow:0 0 14px var(--glow-pur);animation:pulse 2s infinite}
+.d-soon{background:var(--muted)}
+.plbl{font-family:var(--fm);font-size:11px;font-weight:700}
+.pc-done{color:var(--blue)}.pc-act{color:var(--indigo)}.pc-soon{color:var(--muted)}
+.ph3{font-family:var(--fd);font-size:18px;font-weight:700;margin:6px 0 14px}
+.pitem{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted2);margin-bottom:8px}
+.pbul{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.pst{margin-top:14px;font-size:12px;font-weight:700;font-family:var(--fm)}
+.pcard{padding:22px;height:100%}
+
+/* PRICING */
+.prgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:900px;margin:0 auto}
+@media(max-width:768px){.prgrid{grid-template-columns:1fr}}
+.prcard{padding:28px;position:relative;overflow:hidden}
+.popular{position:absolute;top:16px;right:16px;background:var(--grad);color:#fff;font-size:10px;font-weight:700;font-family:var(--fd);padding:4px 12px;border-radius:100px;letter-spacing:.05em}
+.ptier{font-family:var(--fm);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px;color:var(--muted2)}
+.pval{font-family:var(--fd);font-size:44px;font-weight:800;line-height:1;margin-bottom:4px}
+.pval sup{font-size:20px;vertical-align:top;margin-top:8px}
+.pper{font-size:13px;color:var(--muted);margin-bottom:6px}
+.preq{font-size:12px;color:var(--blue);font-family:var(--fm);margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.pfeat{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted2);margin-bottom:10px}
+.pchk{color:var(--blue);font-size:14px;flex-shrink:0}
+.pbtn{display:block;width:100%;padding:12px;border-radius:10px;text-align:center;font-family:var(--fd);font-weight:700;font-size:14px;cursor:pointer;border:none;margin-top:24px;transition:all .2s;text-decoration:none}
+.pb-o{background:transparent;border:1px solid var(--border);color:var(--muted2)}
+.pb-o:hover{border-color:rgba(56,189,248,.3);color:var(--fg)}
+.pb-g{background:var(--grad);color:#fff;box-shadow:0 8px 24px -8px var(--glow-pur)}
+.pb-g:hover{opacity:.9}
+
+/* FAQ */
+.faq-wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.fitem{overflow:hidden}
+.fbtn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:20px 22px;background:none;border:none;cursor:pointer;text-align:left;font-family:var(--fd);font-weight:600;font-size:15px;color:var(--fg);gap:16px}
+.fchev{color:var(--muted2);flex-shrink:0;transition:transform .25s}
+.fchev.on{transform:rotate(180deg)}
+.fans{max-height:0;overflow:hidden;transition:max-height .35s ease,opacity .3s;opacity:0}
+.fans.on{max-height:250px;opacity:1}
+.fans p{padding:0 22px 20px;font-size:13px;color:var(--muted2);line-height:1.8}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relative;z-index:1}
+.fin{max-width:1140px;margin:0 auto}
+.fgrid{display:grid;grid-template-columns:1.2fr repeat(4,1fr);gap:48px;margin-bottom:64px}
+@media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:540px){.fgrid{grid-template-columns:1fr 1fr}}
+.flogo{font-family:var(--fd);font-weight:800;font-size:22px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.fdesc{font-size:13px;color:var(--muted2);line-height:1.65}
+.fcol h4{font-family:var(--fd);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px;color:var(--muted)}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.fcol a{font-size:13px;color:var(--muted2);text-decoration:none;transition:color .2s}
+.fcol a:hover{color:var(--fg)}
+.fbot{border-top:1px solid var(--border);padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.fcopy{font-size:12px;color:var(--muted)}
+.fleg{display:flex;gap:24px}
+.fleg a{font-size:12px;color:var(--muted);text-decoration:none;transition:color .2s}
+.fleg a:hover{color:var(--fg)}
+
+/* ANIM */
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.fu{opacity:0;animation:fadeUp .7s ease forwards}
+.d1{animation-delay:.1s}.d2{animation-delay:.22s}.d3{animation-delay:.34s}.d4{animation-delay:.46s}.d5{animation-delay:.58s}.d6{animation-delay:.7s}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:none}
+
+@media(max-width:640px){nav .nav-links{display:none}.h1{font-size:38px}.hp{font-size:15px}}
+</style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-in">
+    <a href="#" class="nav-logo">
+      <div class="logo-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <span class="grad-text">block</span><span>ID</span>
+    </a>
+    <div class="nav-links">
+      <button class="nbtn" data-s="product">Product</button>
+      <button class="nbtn" data-s="docs">Docs</button>
+      <button class="nbtn" data-s="api">API</button>
+      <button class="nbtn" data-s="roadmap">Roadmap</button>
+      <button class="nbtn" data-s="pricing">Pricing</button>
+      <button class="nbtn" data-s="faq">FAQ</button>
+    </div>
+    <a href="https://app.blockidscore.fun" target="_blank" rel="noopener" class="btn-g">
+      Launch App
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div>
+    <div class="badge fu d1"><span class="bdot"></span>AI-Powered Identity Infrastructure · Live on Mainnet</div>
+    <h1 class="h1 fu d2">Trust Infrastructure<br><span class="grad-text">for Web3</span></h1>
+    <p class="hp fu d3">Programmable identity, reputation scoring, and autonomous AI agents for every Web3 wallet. Build trust at protocol level.</p>
+    <div class="ctas fu d4">
+      <a href="https://app.blockidscore.fun" target="_blank" rel="noopener" class="btn-g">
+        Launch App <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+      </a>
+      <a href="https://api.blockidscore.fun" target="_blank" rel="noopener" class="btn-o">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        API Dashboard
+      </a>
+    </div>
+    <div class="stats-row fu d5">
+      <div class="st"><div class="sv"><span class="counter" data-target="50" data-suffix="M+">0</span></div><div class="sl">Wallets Scored</div></div>
+      <div class="st"><div class="sv">&lt;200ms</div><div class="sl">Avg Latency</div></div>
+      <div class="st"><div class="sv"><span class="counter" data-target="99.9" data-suffix="%" data-dec="1">0</span></div><div class="sl">Uptime SLA</div></div>
+    </div>
+    <div class="fu d6" style="text-align:center">
+      <div class="live-badge"><span class="ldot"></span>app.blockidscore.fun &nbsp;·&nbsp; api.blockidscore.fun &nbsp;·&nbsp; Live Now</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div id="ticker-wrap">
+  <div class="ticker" id="tk">
+    <div class="ti"><strong>50M+</strong> Wallets Scored</div><div class="tsep">·</div>
+    <div class="ti"><strong>6 Chains</strong> Supported</div><div class="tsep">·</div>
+    <div class="ti"><strong>99.9%</strong> Uptime SLA</div><div class="tsep">·</div>
+    <div class="ti"><strong>&lt;200ms</strong> Response Time</div><div class="tsep">·</div>
+    <div class="ti"><strong>Free Tier</strong> · 100 req/mo</div><div class="tsep">·</div>
+    <div class="ti"><strong>TypeScript SDK</strong> · REST + GraphQL</div><div class="tsep">·</div>
+    <div class="ti"><strong>Phase 2</strong> · AI Agents · In Progress</div><div class="tsep">·</div>
+    <div class="ti"><strong>$0</strong> to Start · Scale as you grow</div><div class="tsep">·</div>
+    <!-- duplicate -->
+    <div class="ti"><strong>50M+</strong> Wallets Scored</div><div class="tsep">·</div>
+    <div class="ti"><strong>6 Chains</strong> Supported</div><div class="tsep">·</div>
+    <div class="ti"><strong>99.9%</strong> Uptime SLA</div><div class="tsep">·</div>
+    <div class="ti"><strong>&lt;200ms</strong> Response Time</div><div class="tsep">·</div>
+    <div class="ti"><strong>Free Tier</strong> · 100 req/mo</div><div class="tsep">·</div>
+    <div class="ti"><strong>TypeScript SDK</strong> · REST + GraphQL</div><div class="tsep">·</div>
+    <div class="ti"><strong>Phase 2</strong> · AI Agents · In Progress</div><div class="tsep">·</div>
+    <div class="ti"><strong>$0</strong> to Start · Scale as you grow</div><div class="tsep">·</div>
+  </div>
+</div>
+
+<!-- PRODUCT -->
+<section id="product" class="section">
+  <div class="wrap">
+    <div class="tc reveal"><p class="stag">Product</p><h2 class="sh2">Modular Trust Stack</h2><p class="ssub">Five composable primitives that form the backbone of Web3 identity infrastructure.</p></div>
+    <div class="pgrid">
+      <div class="glass-h pc reveal"><div class="ibox"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3 class="ch3">Wallet Identity Layer</h3><p class="cp">Composable on-chain identity profiles aggregating activity, holdings, and reputation across chains.</p></div>
+      <div class="glass-h pc reveal"><div class="ibox"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div><h3 class="ch3">AI Trust Score</h3><p class="cp">ML-powered scoring engine that evaluates wallet trustworthiness in real-time using behavioral signals.</p></div>
+      <div class="glass-h pc reveal"><div class="ibox"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="6" cy="19" r="3"/><circle cx="6" cy="5" r="3"/><circle cx="18" cy="12" r="3"/><line x1="8.59" y1="6.82" x2="15.42" y2="10.18"/><line x1="8.59" y1="17.18" x2="15.42" y2="13.82"/></svg></div><h3 class="ch3">Smart Router</h3><p class="cp">Intelligent transaction routing that adapts based on trust context, gas optimization, and risk parameters.</p></div>
+      <div class="glass-h pc reveal"><div class="ibox"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h3 class="ch3">AI Agent System</h3><p class="cp">Autonomous agents that monitor, verify, and act on wallet reputation data across protocols.</p></div>
+      <div class="glass-h pc reveal"><div class="ibox"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3 class="ch3">Social Reputation</h3><p class="cp">Cross-platform social graph analysis mapping on-chain and off-chain reputation into a unified score.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCS -->
+<section id="docs" class="section">
+  <div class="wrap">
+    <div class="tc reveal"><p class="stag">Documentation</p><h2 class="sh2">Built for Developers</h2><p class="ssub">Comprehensive SDKs, clear documentation, and production-ready examples.</p></div>
+    <div class="dgrid">
+      <div class="cblock reveal">
+        <div class="chdr"><div class="tl" style="background:#ff5f57"></div><div class="tl" style="background:#ffbc2e"></div><div class="tl" style="background:#28ca41"></div><span class="cfn">quickstart.ts</span></div>
+        <div class="cbody"><pre id="cpre"></pre></div>
+      </div>
+      <div class="flist reveal">
+        <div class="glass-h fcard"><h4 class="fh4">TypeScript SDK</h4><p class="fp">Full type safety with auto-generated types from our API schema.</p></div>
+        <div class="glass-h fcard"><h4 class="fh4">REST &amp; GraphQL</h4><p class="fp">Choose your preferred protocol. Both fully supported with identical coverage.</p></div>
+        <div class="glass-h fcard"><h4 class="fh4">Webhooks</h4><p class="fp">Real-time event notifications for trust score changes and agent actions.</p></div>
+        <div class="glass-h fcard"><h4 class="fh4">Sandbox Mode</h4><p class="fp">Test against simulated wallet data before going live.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- API -->
+<section id="api" class="section">
+  <div class="wrap">
+    <div class="tc reveal"><p class="stag">API Reference</p><h2 class="sh2">One API. Full Stack Trust.</h2><p class="ssub">RESTful endpoints designed for speed, reliability, and developer experience.</p></div>
+    <div class="reveal">
+      <div class="glass acard"><div class="ahdr"><div class="arow"><span class="mget">GET</span><span class="apath">/v1/identity/{address}</span></div><p class="adesc">Retrieve full identity profile for a wallet address</p></div><div class="acode"><pre>{
+  "address": "0x1234...abcd",
+  "trustScore": 87,
+  "level": "HIGH",
+  "identity": {
+    "ens": "alice.eth",
+    "chains": ["ethereum", "polygon", "arbitrum"],
+    "firstSeen": "2021-03-15T00:00:00Z"
+  }
+}</pre></div></div>
+      <div class="glass acard"><div class="ahdr"><div class="arow"><span class="mpost">POST</span><span class="apath">/v1/agents/deploy</span></div><p class="adesc">Deploy an AI monitoring agent for a wallet set</p></div><div class="acode"><pre>{
+  "agentId": "agent_7xk2m9",
+  "status": "active",
+  "monitoring": 142,
+  "triggers": ["score_drop", "anomaly"]
+}</pre></div></div>
+    </div>
+    <div class="tc reveal" style="margin-top:32px">
+      <a href="https://api.blockidscore.fun" target="_blank" rel="noopener" class="btn-g">Open API Dashboard <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap" class="section">
+  <div class="wrap">
+    <div class="tc reveal"><p class="stag">Roadmap</p><h2 class="sh2">Building in Phases</h2></div>
+    <div class="rgrid reveal">
+      <div class="rline"></div>
+      <div><div class="pdot d-done"></div><div class="glass pcard"><span class="plbl pc-done">Phase 1</span><h3 class="ph3">Foundation</h3><div class="pitem"><span class="pbul" style="background:var(--blue)"></span>Identity SDK launch</div><div class="pitem"><span class="pbul" style="background:var(--blue)"></span>Trust Score v1</div><div class="pitem"><span class="pbul" style="background:var(--blue)"></span>Mainnet deployment</div><div class="pst" style="color:var(--blue)">✓ Complete</div></div></div>
+      <div><div class="pdot d-act"></div><div class="glass glow-card pcard"><span class="plbl pc-act">Phase 2</span><h3 class="ph3">Intelligence</h3><div class="pitem"><span class="pbul" style="background:var(--indigo)"></span>AI Agent framework</div><div class="pitem"><span class="pbul" style="background:var(--indigo)"></span>Social reputation module</div><div class="pitem"><span class="pbul" style="background:var(--indigo)"></span>Multi-chain expansion</div><div class="pst" style="color:var(--indigo)">● In Progress</div></div></div>
+      <div><div class="pdot d-soon"></div><div class="glass pcard"><span class="plbl pc-soon">Phase 3</span><h3 class="ph3">Scale</h3><div class="pitem"><span class="pbul" style="background:var(--muted)"></span>Smart Router v2</div><div class="pitem"><span class="pbul" style="background:var(--muted)"></span>Enterprise APIs</div><div class="pitem"><span class="pbul" style="background:var(--muted)"></span>Governance integration</div></div></div>
+      <div><div class="pdot d-soon"></div><div class="glass pcard"><span class="plbl pc-soon">Phase 4</span><h3 class="ph3">Autonomy</h3><div class="pitem"><span class="pbul" style="background:var(--muted)"></span>Autonomous agent network</div><div class="pitem"><span class="pbul" style="background:var(--muted)"></span>Cross-protocol trust mesh</div><div class="pitem"><span class="pbul" style="background:var(--muted)"></span>Decentralized scoring</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="section">
+  <div class="wrap">
+    <div class="tc reveal"><p class="stag">Pricing</p><h2 class="sh2">Simple, Transparent Plans</h2><p class="ssub">Start free, scale as you grow. No hidden fees.</p></div>
+    <div class="prgrid reveal">
+      <div class="glass prcard">
+        <div class="ptier">Free</div>
+        <div class="pval"><sup>$</sup>0</div>
+        <div class="pper">forever</div>
+        <div class="preq">100 requests/month</div>
+        <div class="pfeat"><span class="pchk">✓</span>100 requests/month</div>
+        <div class="pfeat"><span class="pchk">✓</span>Single wallet scoring</div>
+        <div class="pfeat"><span class="pchk">✓</span>Basic support</div>
+        <div class="pfeat"><span class="pchk">✓</span>Test environment</div>
+        <a href="https://api.blockidscore.fun" target="_blank" class="pbtn pb-o">Get Started Free</a>
+      </div>
+      <div class="glass glow-card prcard">
+        <div class="popular">Most Popular</div>
+        <div class="ptier" style="color:var(--blue)">Pro</div>
+        <div class="pval grad-text"><sup>$</sup>29</div>
+        <div class="pper">per month</div>
+        <div class="preq" style="color:var(--blue)">50,000 requests/month</div>
+        <div class="pfeat"><span class="pchk">✓</span>50,000 requests/month</div>
+        <div class="pfeat"><span class="pchk">✓</span>Batch processing (50 wallets)</div>
+        <div class="pfeat"><span class="pchk">✓</span>Webhook notifications</div>
+        <div class="pfeat"><span class="pchk">✓</span>Priority support</div>
+        <div class="pfeat"><span class="pchk">✓</span>Live + test environment</div>
+        <a href="https://api.blockidscore.fun/dashboard/billing" target="_blank" class="pbtn pb-g">Upgrade to Pro</a>
+      </div>
+      <div class="glass prcard">
+        <div class="ptier">Enterprise</div>
+        <div class="pval"><sup>$</sup>199</div>
+        <div class="pper">per month</div>
+        <div class="preq">Unlimited requests/month</div>
+        <div class="pfeat"><span class="pchk">✓</span>Unlimited requests</div>
+        <div class="pfeat"><span class="pchk">✓</span>Batch processing (unlimited)</div>
+        <div class="pfeat"><span class="pchk">✓</span>Custom SLA</div>
+        <div class="pfeat"><span class="pchk">✓</span>Dedicated support</div>
+        <div class="pfeat"><span class="pchk">✓</span>Custom integrations</div>
+        <a href="https://api.blockidscore.fun/dashboard/billing" target="_blank" class="pbtn pb-o">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section">
+  <div class="wrap">
+    <div class="tc reveal"><p class="stag">FAQ</p><h2 class="sh2">Common Questions</h2></div>
+    <div class="faq-wrap reveal" id="faq-root"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fin">
+    <div class="fgrid">
+      <div>
+        <div class="flogo"><div class="logo-box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="grad-text">block</span>ID</div>
+        <p class="fdesc">AI-powered trust infrastructure for Web3.</p>
+        <div class="live-badge" style="margin-top:14px"><span class="ldot"></span>Live · blockidscore.fun</div>
+      </div>
+      <div class="fcol"><h4>Product</h4><ul><li><a href="#">Identity Layer</a></li><li><a href="#">Trust Score</a></li><li><a href="#">Smart Router</a></li><li><a href="#">AI Agents</a></li><li><a href="#">Social Reputation</a></li></ul></div>
+      <div class="fcol"><h4>Developers</h4><ul><li><a href="https://api.blockidscore.fun" target="_blank">Documentation</a></li><li><a href="https://api.blockidscore.fun" target="_blank">API Reference</a></li><li><a href="#">SDK</a></li><li><a href="#">Changelog</a></li><li><a href="#">Status</a></li></ul></div>
+      <div class="fcol"><h4>Community</h4><ul><li><a href="#">Discord</a></li><li><a href="#">Twitter</a></li><li><a href="https://github.com/Bekal17/trust-ledger" target="_blank">GitHub</a></li><li><a href="#">Blog</a></li><li><a href="#">Forum</a></li></ul></div>
+      <div class="fcol"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Press Kit</a></li><li><a href="#">Contact</a></li><li><a href="#">Terms</a></li></ul></div>
+    </div>
+    <div class="fbot">
+      <p class="fcopy">© 2025 blockID. All rights reserved.</p>
+      <div class="fleg"><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* CANVAS */
+(function(){
+  const c=document.getElementById('bg-canvas'),ctx=c.getContext('2d');
+  let W,H,pts,mx=-9999,my=-9999;
+
+  // Mouse trail: stores recent positions with timestamp
+  const trail=[];
+  const TRAIL_LEN=120;
+  const TRAIL_LIFE=900; // ms until fully faded
+
+  const resize=()=>{W=c.width=innerWidth;H=c.height=innerHeight};
+  const rand=(a,b)=>Math.random()*(b-a)+a;
+  const init=()=>{pts=Array.from({length:Math.floor(W*H/12000)},()=>({x:rand(0,W),y:rand(0,H),vx:rand(-.18,.18),vy:rand(-.18,.18),r:rand(.8,2.2),a:rand(.08,.4),col:Math.random()>.55?'56,189,248':'124,58,237'}))};
+  const drawGrid=()=>{const s=60,sc=scrollY*.04;ctx.strokeStyle='rgba(56,189,248,0.02)';ctx.lineWidth=1;ctx.beginPath();for(let x=sc%s;x<W;x+=s){ctx.moveTo(x,0);ctx.lineTo(x,H)}for(let y=sc%s;y<H;y+=s){ctx.moveTo(0,y);ctx.lineTo(W,y)}ctx.stroke()};
+  const drawOrbs=()=>{const t=Date.now()/4000;[{x:W*.2,y:H*.3,r:320,c:'124,58,237',a:.05+.018*Math.sin(t)},{x:W*.8,y:H*.6,r:280,c:'56,189,248',a:.04+.015*Math.sin(t+1.5)},{x:W*.5,y:H*.85,r:200,c:'129,140,248',a:.028+.01*Math.sin(t+3)}].forEach(o=>{const g=ctx.createRadialGradient(o.x,o.y,0,o.x,o.y,o.r);g.addColorStop(0,`rgba(${o.c},${o.a})`);g.addColorStop(1,`rgba(${o.c},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(o.x,o.y,o.r,0,Math.PI*2);ctx.fill()})};
+  const drawPts=()=>{pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;const dx=p.x-mx,dy=p.y-my,d=Math.sqrt(dx*dx+dy*dy);if(d<110){const f=(110-d)/110*.5;p.x+=dx/d*f;p.y+=dy/d*f}ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(${p.col},${p.a})`;ctx.fill()});for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<90){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(56,189,248,${.05*(1-d/90)})`;ctx.lineWidth=.5;ctx.stroke()}}};
+
+  // Draw mouse trail — thin elegant fading lines
+  const drawTrail=()=>{
+    const now=Date.now();
+    // Remove expired points
+    while(trail.length>0 && now-trail[0].t>TRAIL_LIFE) trail.shift();
+    if(trail.length<2) return;
+    ctx.save();
+    ctx.lineCap='round';
+    ctx.lineJoin='round';
+    for(let i=1;i<trail.length;i++){
+      const p0=trail[i-1],p1=trail[i];
+      const age=now-p1.t;
+      const life=Math.max(0,1-age/TRAIL_LIFE);
+      // position ratio within trail (newer = brighter)
+      const ratio=i/trail.length;
+      const alpha=life*ratio*0.95;
+      if(alpha<0.005) continue;
+      const w=0.5+ratio*2.2;
+      // button gradient: tail=purple #7c3aed → head=blue #0ea5e9
+      const r=Math.round(124+(14-124)*ratio);
+      const g2=Math.round(58+(165-58)*ratio);
+      const b=Math.round(237+(233-237)*ratio);
+      ctx.beginPath();
+      ctx.moveTo(p0.x,p0.y);
+      ctx.lineTo(p1.x,p1.y);
+      // Outer glow
+      ctx.shadowColor=`rgba(${r},${g2},${b},${alpha})`;
+      ctx.shadowBlur=14+ratio*14;
+      ctx.strokeStyle=`rgba(${r},${g2},${b},${alpha})`;
+      ctx.lineWidth=w;
+      ctx.stroke();
+      // Bright white core
+      ctx.shadowBlur=3;
+      ctx.strokeStyle=`rgba(255,255,255,${alpha*0.4*ratio})`;
+      ctx.lineWidth=w*0.28;
+      ctx.stroke();
+    }
+    ctx.restore();
+  };
+
+  const loop=()=>{ctx.clearRect(0,0,W,H);drawGrid();drawOrbs();drawPts();drawTrail();requestAnimationFrame(loop)};
+  window.addEventListener('resize',()=>{resize();init()});
+  window.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    trail.push({x:mx,y:my,t:Date.now()});
+    if(trail.length>TRAIL_LEN) trail.shift();
+  },{passive:true});
+  resize();init();loop()
+})();
+
+/* NAV */
+(function(){
+  const nav=document.getElementById('nav'),btns=document.querySelectorAll('.nbtn[data-s]'),secs=['product','docs','api','roadmap','pricing','faq'];
+  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>20);const pos=scrollY+130;let a='';secs.forEach(id=>{const el=document.getElementById(id);if(el&&el.offsetTop<=pos)a=id});btns.forEach(b=>b.classList.toggle('on',b.dataset.s===a))},{passive:true});
+  btns.forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.s)?.scrollIntoView({behavior:'smooth'})));
+})();
+
+/* CODE */
+(function(){
+  const src=`import { BlockID } from '@blockid/sdk';\n\nconst client = new BlockID({\n  apiKey: process.env.BLOCKID_API_KEY,\n  network: 'mainnet',\n});\n\n// Get wallet trust score\nconst score = await client.identity.getTrustScore(\n  '0x1234...abcd'\n);\n\nconsole.log(score);\n// {\n//   address: "0x1234...abcd",\n//   trustScore: 87,\n//   level: "HIGH",\n//   factors: { ... }\n// }`;
+  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  document.getElementById('cpre').innerHTML=src.split('\n').map((l,i)=>{let c='lx';if(l.trimStart().startsWith('//'))c='lc';else if(/['"]/.test(l))c='ls';else if(/^(import|const|await)/.test(l.trim()))c='lk';return`<div class="ln-row"><span class="lno">${i+1}</span><span class="${c}">${esc(l)||' '}</span></div>`}).join('')
+})();
+
+/* COUNTER */
+function animCounter(el){
+  const tgt=parseFloat(el.dataset.target),sfx=el.dataset.suffix||'',dec=parseInt(el.dataset.dec||0),dur=2200,st=performance.now();
+  (function step(now){const p=Math.min((now-st)/dur,1),e=1-Math.pow(1-p,3),v=tgt*e;el.textContent=(dec?v.toFixed(dec):Math.floor(v))+sfx;if(p<1)requestAnimationFrame(step)})(st)
+}
+
+/* FAQ */
+(function(){
+  const faqs=[
+    {q:"What is blockID?",a:"blockID is an AI-powered trust and identity infrastructure for Web3. It provides programmable identity profiles, trust scoring, and autonomous AI agents that work across chains and protocols."},
+    {q:"How does the AI Trust Score work?",a:"Our ML engine analyzes on-chain activity, transaction patterns, holding behavior, social signals, and cross-chain data to generate a real-time trust score for any wallet address."},
+    {q:"What chains are supported?",a:"blockID currently supports Ethereum, Polygon, Arbitrum, Optimism, Base, and BNB Chain, with more networks being added through our multi-chain expansion roadmap."},
+    {q:"How do AI Agents work?",a:"AI Agents are autonomous monitoring services that can be deployed to track wallet sets, detect anomalies, and trigger actions based on configurable trust thresholds and behavioral patterns."},
+    {q:"Is there a free tier?",a:"Yes. blockID offers a free tier with 100 API calls/month, sandbox mode, and basic trust score queries. Pro plan at $29/mo includes 50,000 requests. Enterprise at $199/mo is fully unlimited."},
+    {q:"How can I integrate blockID into my dApp?",a:"Install our TypeScript SDK via npm, initialize with your API key, and start querying trust scores. Full integration typically takes less than 30 minutes."},
+  ];
+  const root=document.getElementById('faq-root');
+  faqs.forEach((f,i)=>{const d=document.createElement('div');d.className='glass fitem';d.innerHTML=`<button class="fbtn" onclick="tFaq(${i},this)"><span>${f.q}</span><svg class="fchev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg></button><div class="fans" id="ff${i}"><p>${f.a}</p></div>`;root.appendChild(d)});
+  window.tFaq=(i,btn)=>{const a=document.getElementById('ff'+i),ch=btn.querySelector('.fchev'),o=a.classList.contains('on');document.querySelectorAll('.fans').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.fchev').forEach(x=>x.classList.remove('on'));if(!o){a.classList.add('on');ch.classList.add('on')}}
+})();
+
+/* SCROLL REVEAL */
+(function(){
+  const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*60);e.target.querySelectorAll('.counter').forEach(animCounter);obs.unobserve(e.target)}})},{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  setTimeout(()=>document.querySelectorAll('.counter').forEach(animCounter),700)
+})();
+</script>
+</body>
+</html>
