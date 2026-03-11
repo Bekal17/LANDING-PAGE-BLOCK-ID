@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>blockID — The Human Interface for Blockchain</title>
+<title>BlockID</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -304,17 +304,17 @@ footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relati
 <!-- DOCS -->
 <section id="docs" class="section">
   <div class="wrap">
-    <div class="tc reveal"><p class="stag">Documentation</p><h2 class="sh2">Built for Builders</h2><p class="ssub">Integrate wallet trust scoring into your dApp in under 30 minutes. REST API, TypeScript SDK, and live sandbox.</p></div>
+    <div class="tc reveal"><p class="stag">Documentation</p><h2 class="sh2">Built for Developers</h2><p class="ssub">Simple REST API. Works with any language. Get your first trust score in minutes.</p></div>
     <div class="dgrid">
       <div class="cblock reveal">
-        <div class="chdr"><div class="tl" style="background:#ff5f57"></div><div class="tl" style="background:#ffbc2e"></div><div class="tl" style="background:#28ca41"></div><span class="cfn">quickstart.ts</span></div>
+        <div class="chdr"><div class="tl" style="background:#ff5f57"></div><div class="tl" style="background:#ffbc2e"></div><div class="tl" style="background:#28ca41"></div><span class="cfn">quickstart.js</span></div>
         <div class="cbody"><pre id="cpre"></pre></div>
       </div>
       <div class="flist reveal">
-        <div class="glass-h fcard"><h4 class="fh4">TypeScript SDK</h4><p class="fp">Full type safety with auto-generated types from our API schema.</p></div>
-        <div class="glass-h fcard"><h4 class="fh4">REST &amp; GraphQL</h4><p class="fp">Choose your preferred protocol. Both fully supported with identical coverage.</p></div>
-        <div class="glass-h fcard"><h4 class="fh4">Webhooks</h4><p class="fp">Real-time event notifications for trust score changes and agent actions.</p></div>
-        <div class="glass-h fcard"><h4 class="fh4">Sandbox Mode</h4><p class="fp">Test against simulated wallet data before going live.</p></div>
+        <div class="glass-h fcard"><h4 class="fh4">REST API</h4><p class="fp">Simple HTTP endpoints. Works with any language — Python, JavaScript, Go, or plain curl.</p></div>
+        <div class="glass-h fcard"><h4 class="fh4">API Key Auth</h4><p class="fp">Generate and manage API keys instantly from your dashboard. No OAuth complexity.</p></div>
+        <div class="glass-h fcard"><h4 class="fh4">Batch Scoring</h4><p class="fp">Score up to 50 wallets in a single request. Built for sybil detection and bulk analysis.</p></div>
+        <div class="glass-h fcard"><h4 class="fh4">Webhooks</h4><p class="fp">Real-time notifications for trust score changes. Coming soon.</p></div>
       </div>
     </div>
   </div>
@@ -514,7 +514,7 @@ footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relati
 
 /* CODE */
 (function(){
-  const src=`import { BlockID } from '@blockid/sdk';\n\nconst client = new BlockID({\n  apiKey: process.env.BLOCKID_API_KEY,\n  network: 'devnet', // mainnet coming soon\n});\n\n// Get wallet trust score\nconst score = await client.getTrustScore(\n  '7TPgh8Lfkb7ss2KnKaswQLtMJZabtMFiHnb3s5uhgN3p'\n);\n\nconsole.log(score);\n// {\n//   address: "7TPgh8...gN3p",\n//   trustScore: 47,\n//   level: "MEDIUM",\n//   riskFactors: ["SCAM_CLUSTER"],\n//   behavioralFingerprint: { ... }\n// }`;
+  const src=`// No SDK needed — plain fetch works\nconst apiKey = process.env.BLOCKID_API_KEY;\n\n// Single wallet score\nconst res = await fetch(\n  'https://blockid-backend-production.up.railway.app/v1/score/7TPgh8Lfkb7ss2KnKaswQLtMJZabtMFiHnb3s5uhgN3p',\n  { headers: { 'X-API-Key': apiKey } }\n);\n\nconst score = await res.json();\nconsole.log(score);\n// {\n//   address: '7TPgh8...gN3p',\n//   trustScore: 47,\n//   level: 'MEDIUM',\n//   riskFactors: ['SCAM_CLUSTER']\n// }`;
   const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   document.getElementById('cpre').innerHTML=src.split('\n').map((l,i)=>{let c='lx';if(l.trimStart().startsWith('//'))c='lc';else if(/['"]/.test(l))c='ls';else if(/^(import|const|await)/.test(l.trim()))c='lk';return`<div class="ln-row"><span class="lno">${i+1}</span><span class="${c}">${esc(l)||' '}</span></div>`}).join('')
 })();
