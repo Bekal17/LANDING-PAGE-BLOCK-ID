@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="icon" type="image/svg+xml" href="blockid_logo.svg">
+<link rel="shortcut icon" href="blockid_logo.svg">
+<title>Refund Policy — BlockID</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#38bdf8;--blue-mid:#0ea5e9;--blue-dark:#0369a1;--purple:#7c3aed;--purple-mid:#6d28d9;--indigo:#818cf8;
+  --bg:#06050f;--bg2:#0a0818;--surface:rgba(255,255,255,0.04);--surface2:rgba(56,189,248,0.06);
+  --border:rgba(56,189,248,0.1);--border2:rgba(124,58,237,0.25);--fg:#f0f8ff;--muted:#64748b;--muted2:#94a3b8;
+  --grad:linear-gradient(135deg,#7c3aed,#0ea5e9);--grad2:linear-gradient(135deg,#38bdf8,#818cf8);
+  --glow-blue:rgba(56,189,248,0.3);--glow-pur:rgba(124,58,237,0.3);
+  --fd:'ClashDisplay',sans-serif;--fm:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--fm);font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+.grad-text{background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;padding:0 24px;background:rgba(6,5,15,.8);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 4px 40px rgba(0,0,0,.6)}
+.nav-in{max-width:1280px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--fd);font-weight:800;font-size:20px;text-decoration:none;display:flex;align-items:center;gap:8px;color:inherit}
+.logo-box{width:32px;height:32px;border-radius:8px;background:var(--grad);display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px -4px var(--glow-pur)}
+.btn-g{display:inline-flex;align-items:center;gap:8px;padding:9px 22px;border-radius:10px;background:var(--grad);color:#fff;font-family:var(--fd);font-weight:700;font-size:13px;text-decoration:none;box-shadow:0 0 28px -8px var(--glow-pur)}
+footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relative;z-index:1}
+.fin{max-width:1140px;margin:0 auto}
+.fgrid{display:grid;grid-template-columns:1.2fr repeat(4,1fr);gap:48px;margin-bottom:64px}
+@media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:540px){.fgrid{grid-template-columns:1fr 1fr}}
+.flogo{font-family:var(--fd);font-weight:800;font-size:22px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.fdesc{font-size:13px;color:var(--muted2);line-height:1.65}
+.fcol h4{font-family:var(--fd);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px;color:var(--muted)}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.fcol a{font-size:13px;color:var(--muted2);text-decoration:none;transition:color .2s}
+.fcol a:hover{color:var(--fg)}
+.fbot{border-top:1px solid var(--border);padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.fcopy{font-size:12px;color:var(--muted)}
+.fleg{display:flex;gap:24px}
+.fleg a{font-size:12px;color:var(--muted);text-decoration:none;transition:color .2s}
+.fleg a:hover{color:var(--fg)}
+.live-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.18);border-radius:8px;padding:5px 14px;font-size:11px;color:var(--blue);font-family:var(--fm);margin-top:20px}
+.ldot{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+.legal-wrap{max-width:760px;margin:0 auto;padding:120px 24px 80px}
+.legal-h1{font-family:var(--fd);font-size:clamp(32px,6vw,56px);font-weight:700;letter-spacing:-.03em;margin-bottom:8px}
+.legal-meta{font-size:13px;color:var(--muted);margin-bottom:56px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.legal-section{margin-bottom:40px}
+.legal-h2{font-family:var(--fd);font-size:20px;font-weight:700;margin-bottom:12px;color:var(--fg)}
+.legal-p{font-size:14px;color:var(--muted2);line-height:1.85;margin-bottom:12px}
+.legal-ul{padding-left:20px;margin-bottom:12px}
+.legal-ul li{font-size:14px;color:var(--muted2);line-height:1.85;margin-bottom:6px}
+.legal-contact{margin-top:56px;padding:24px;border:1px solid var(--border);border-radius:16px;background:var(--surface)}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted2);text-decoration:none;margin-bottom:40px;transition:color .2s}
+.back-link:hover{color:var(--fg)}
+</style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+
+<nav id="nav">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo">
+      <img src="blockid_logo.svg" alt="BlockID" height="32" style="display:block;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div class="logo-box" style="display:none;width:32px;height:32px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg></div>
+      <span style="color:#f0f8ff;">block<span class="grad-text">ID</span></span>
+    </a>
+    <a href="https://app.blockidscore.fun" target="_blank" rel="noopener" class="btn-g">Launch App <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></a>
+  </div>
+</nav>
+
+<main style="position:relative;z-index:1">
+  <div class="legal-wrap">
+    <a href="index.html" class="back-link">← Back to BlockID</a>
+    <h1 class="legal-h1">Refund Policy</h1>
+    <div class="legal-meta">Last updated: March 20, 2026 · BlockID · <a href="mailto:legal@blockidscore.fun" style="color:var(--blue)">legal@blockidscore.fun</a></div>
+
+    <div class="legal-section">
+      <h2 class="legal-h2">1. Overview</h2>
+      <p class="legal-p">Payments for BlockID B2B API subscriptions are processed by Paddle, our Merchant of Record. Paddle handles all billing, invoicing, and refund processing on our behalf.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-h2">2. Subscription Plans</h2>
+      <p class="legal-p">BlockID offers monthly and annual subscription plans for API access. Plans are billed in advance.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-h2">3. Refund Eligibility</h2>
+      <ul class="legal-ul">
+        <li>Full refund available within 7 days of your first purchase</li>
+        <li>No refunds after 7 days, except where service availability falls below 72 continuous hours in a billing period</li>
+        <li>Annual plan subscribers who cancel after 7 days may request a pro-rated refund for unused months</li>
+        <li>Free tier usage is not eligible for refund (no charge)</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-h2">4. How to Request a Refund</h2>
+      <p class="legal-p">Email us at legal@blockidscore.fun with:</p>
+      <ul class="legal-ul">
+        <li>Subject: "Refund Request"</li>
+        <li>Your wallet address</li>
+        <li>Your Paddle transaction ID or order number</li>
+        <li>Reason for refund request</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-h2">5. Processing Time</h2>
+      <p class="legal-p">Approved refunds are processed within 5–10 business days and returned to your original payment method.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-h2">6. Exceptions</h2>
+      <p class="legal-p">Refunds will not be issued for:</p>
+      <ul class="legal-ul">
+        <li>Partial month usage</li>
+        <li>API key misuse or policy violations</li>
+        <li>Downtime caused by third-party services (Solana network, etc.)</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h2 class="legal-h2">7. Contact</h2>
+      <p class="legal-p">For refund requests: legal@blockidscore.fun</p>
+    </div>
+
+    <div class="legal-contact">
+      <p style="font-size:14px;color:var(--muted2)">Questions about this policy? Contact us at <a href="mailto:legal@blockidscore.fun" style="color:var(--blue)">legal@blockidscore.fun</a></p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="fin">
+    <div class="fgrid">
+      <div>
+        <div class="flogo"><img src="blockid_logo.svg" alt="blockID" height="28" style="display:block;"></div>
+        <p class="fdesc">The human interface for blockchain. Send, connect, and build reputation on-chain without the complexity.</p>
+        <div class="live-badge" style="margin-top:14px"><span class="ldot"></span>Devnet · blockidscore.fun</div>
+      </div>
+      <div class="fcol"><h4>Product</h4><ul><li><a href="index.html#product">NFT Identity</a></li><li><a href="index.html#product">@Handle Registry</a></li><li><a href="index.html#product">Trust Score</a></li><li><a href="index.html#product">Smart Router</a></li><li><a href="index.html#product">Social Layer</a></li></ul></div>
+      <div class="fcol"><h4>Developers</h4><ul><li><a href="https://api.blockidscore.fun" target="_blank" rel="noopener">Documentation</a></li><li><a href="https://api.blockidscore.fun" target="_blank" rel="noopener">API Reference</a></li><li><a href="index.html#docs">SDK</a></li><li><a href="#">Changelog</a></li><li><a href="#">Status</a></li></ul></div>
+      <div class="fcol"><h4>Community</h4><ul><li><a href="https://x.com/BlockID_AI" target="_blank" rel="noopener">Twitter</a></li><li><a href="https://github.com/Bekal17" target="_blank" rel="noopener">GitHub</a></li></ul></div>
+      <div class="fcol"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Press Kit</a></li><li><a href="#">Contact</a></li><li><a href="terms.html">Terms</a></li></ul></div>
+    </div>
+    <div class="fbot">
+      <p class="fcopy">© 2026 blockID. All rights reserved.</p>
+      <div class="fleg">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="refund.html">Refund</a>
+        <a href="cookies.html">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const c=document.getElementById('bg-canvas'),ctx=c.getContext('2d');
+  let W,H,pts,mx=-9999,my=-9999;
+  const trail=[];const TRAIL_LEN=120;const TRAIL_LIFE=900;
+  const resize=()=>{W=c.width=innerWidth;H=c.height=innerHeight};
+  const rand=(a,b)=>Math.random()*(b-a)+a;
+  const init=()=>{pts=Array.from({length:Math.floor(W*H/12000)},()=>({x:rand(0,W),y:rand(0,H),vx:rand(-.18,.18),vy:rand(-.18,.18),r:rand(.8,2.2),a:rand(.08,.4),col:Math.random()>.55?'56,189,248':'124,58,237'}))};
+  const drawGrid=()=>{const s=60,sc=scrollY*.04;ctx.strokeStyle='rgba(56,189,248,0.02)';ctx.lineWidth=1;ctx.beginPath();for(let x=sc%s;x<W;x+=s){ctx.moveTo(x,0);ctx.lineTo(x,H)}for(let y=sc%s;y<H;y+=s){ctx.moveTo(0,y);ctx.lineTo(W,y)}ctx.stroke()};
+  const drawOrbs=()=>{const t=Date.now()/4000;[{x:W*.2,y:H*.3,r:320,c:'124,58,237',a:.05+.018*Math.sin(t)},{x:W*.8,y:H*.6,r:280,c:'56,189,248',a:.04+.015*Math.sin(t+1.5)},{x:W*.5,y:H*.85,r:200,c:'129,140,248',a:.028+.01*Math.sin(t+3)}].forEach(o=>{const g=ctx.createRadialGradient(o.x,o.y,0,o.x,o.y,o.r);g.addColorStop(0,`rgba(${o.c},${o.a})`);g.addColorStop(1,`rgba(${o.c},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(o.x,o.y,o.r,0,Math.PI*2);ctx.fill()})};
+  const drawPts=()=>{pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;const dx=p.x-mx,dy=p.y-my,d=Math.sqrt(dx*dx+dy*dy);if(d<110){const f=(110-d)/110*.5;p.x+=dx/d*f;p.y+=dy/d*f}ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(${p.col},${p.a})`;ctx.fill()});for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<90){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(56,189,248,${.05*(1-d/90)})`;ctx.lineWidth=.5;ctx.stroke()}}};
+  const drawTrail=()=>{const now=Date.now();while(trail.length>0&&now-trail[0].t>TRAIL_LIFE)trail.shift();if(trail.length<2)return;ctx.save();ctx.lineCap='round';ctx.lineJoin='round';for(let i=1;i<trail.length;i++){const p0=trail[i-1],p1=trail[i];const age=now-p1.t;const life=Math.max(0,1-age/TRAIL_LIFE);const ratio=i/trail.length;const alpha=life*ratio*0.95;if(alpha<0.005)continue;const w=0.5+ratio*2.2;const r=Math.round(124+(14-124)*ratio);const g2=Math.round(58+(165-58)*ratio);const b=Math.round(237+(233-237)*ratio);ctx.beginPath();ctx.moveTo(p0.x,p0.y);ctx.lineTo(p1.x,p1.y);ctx.shadowColor=`rgba(${r},${g2},${b},${alpha})`;ctx.shadowBlur=14+ratio*14;ctx.strokeStyle=`rgba(${r},${g2},${b},${alpha})`;ctx.lineWidth=w;ctx.stroke();ctx.shadowBlur=3;ctx.strokeStyle=`rgba(255,255,255,${alpha*0.4*ratio})`;ctx.lineWidth=w*0.28;ctx.stroke()}ctx.restore()};
+  const loop=()=>{ctx.clearRect(0,0,W,H);drawGrid();drawOrbs();drawPts();drawTrail();requestAnimationFrame(loop)};
+  window.addEventListener('resize',()=>{resize();init()});
+  window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;trail.push({x:mx,y:my,t:Date.now()});if(trail.length>TRAIL_LEN)trail.shift()},{passive:true});
+  resize();init();loop()
+})();
+(function(){
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>20)},{passive:true});
+})();
+</script>
+</body>
+</html>
