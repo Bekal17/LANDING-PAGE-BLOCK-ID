@@ -159,23 +159,22 @@ pre{font-family:var(--fm);font-size:12.5px;line-height:1.8}
 .pst{margin-top:14px;font-size:12px;font-weight:700;font-family:var(--fm)}
 .pcard{padding:22px;height:100%}
 
-/* PRICING */
+/* PRICING - compact */
 .prgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:900px;margin:0 auto}
 @media(max-width:768px){.prgrid{grid-template-columns:1fr}}
-.prcard{padding:28px;position:relative;overflow:hidden}
+.prcard{padding:28px 24px;position:relative;overflow:hidden;text-align:center}
 .popular{position:absolute;top:16px;right:16px;background:var(--grad);color:#fff;font-size:10px;font-weight:700;font-family:var(--fd);padding:4px 12px;border-radius:100px;letter-spacing:.05em}
-.ptier{font-family:var(--fm);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px;color:var(--muted2)}
-.pval{font-family:var(--fd);font-size:44px;font-weight:800;line-height:1;margin-bottom:4px}
-.pval sup{font-size:20px;vertical-align:top;margin-top:8px}
-.pper{font-size:13px;color:var(--muted);margin-bottom:6px}
-.preq{font-size:12px;color:var(--blue);font-family:var(--fm);margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border)}
-.pfeat{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted2);margin-bottom:10px}
-.pchk{color:var(--blue);font-size:14px;flex-shrink:0}
-.pbtn{display:block;width:100%;padding:12px;border-radius:10px;text-align:center;font-family:var(--fd);font-weight:700;font-size:14px;cursor:pointer;border:none;margin-top:24px;transition:all .2s;text-decoration:none}
+.ptier{font-family:var(--fm);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
+.pval{font-family:var(--fd);font-size:40px;font-weight:800;line-height:1;margin-bottom:8px}
+.pval sup{font-size:18px;vertical-align:top;margin-top:8px}
+.ptagline{font-size:13px;color:var(--muted2);margin-bottom:24px;line-height:1.5}
+.pbtn{display:block;width:100%;padding:12px;border-radius:10px;text-align:center;font-family:var(--fd);font-weight:700;font-size:14px;cursor:pointer;border:none;margin-top:0;transition:all .2s;text-decoration:none}
 .pb-o{background:transparent;border:1px solid var(--border);color:var(--muted2)}
 .pb-o:hover{border-color:rgba(56,189,248,.3);color:var(--fg)}
 .pb-g{background:var(--grad);color:#fff;box-shadow:0 8px 24px -8px var(--glow-pur)}
 .pb-g:hover{opacity:.9}
+.pcompact-link{display:inline-block;margin-top:32px;font-size:13px;color:var(--blue);text-decoration:none;transition:color .2s}
+.pcompact-link:hover{color:var(--blue-mid)}
 
 /* FAQ */
 .faq-wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
@@ -373,42 +372,26 @@ footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relati
     <div class="tc reveal"><p class="stag">Pricing</p><h2 class="sh2">Simple, Transparent Plans</h2><p class="ssub">Start free, scale as you grow. No hidden fees.</p></div>
     <div class="prgrid reveal">
       <div class="glass prcard">
-        <div class="ptier">Free</div>
-        <div class="pval"><sup>$</sup>0</div>
-        <div class="pper">forever</div>
-        <div class="preq">100 requests/month</div>
-        <div class="pfeat"><span class="pchk">✓</span>100 requests/month</div>
-        <div class="pfeat"><span class="pchk">✓</span>Single wallet scoring</div>
-        <div class="pfeat"><span class="pchk">✓</span>Basic support</div>
-        <div class="pfeat"><span class="pchk">✓</span>Test environment</div>
-        <a href="https://api.blockidscore.fun" target="_blank" class="pbtn pb-o">Get Started Free</a>
+        <div class="ptier" style="color:var(--muted2)">Free</div>
+        <div class="pval"><sup>$</sup>0<span style="font-size:16px;font-weight:500;color:var(--muted2)">/mo</span></div>
+        <div class="ptagline">100 req/month · No card needed</div>
+        <a href="https://api.blockidscore.fun" target="_blank" rel="noopener" class="pbtn pb-o">Get Started</a>
       </div>
       <div class="glass glow-card prcard">
         <div class="popular">Most Popular</div>
-        <div class="ptier" style="color:var(--blue)">Pro</div>
-        <div class="pval grad-text"><sup>$</sup>29</div>
-        <div class="pper">per month</div>
-        <div class="preq" style="color:var(--blue)">50,000 requests/month</div>
-        <div class="pfeat"><span class="pchk">✓</span>50,000 requests/month</div>
-        <div class="pfeat"><span class="pchk">✓</span>Batch processing (50 wallets)</div>
-        <div class="pfeat"><span class="pchk">✓</span>Webhook notifications</div>
-        <div class="pfeat"><span class="pchk">✓</span>Priority support</div>
-        <div class="pfeat"><span class="pchk">✓</span>Live + test environment</div>
-        <a href="https://api.blockidscore.fun/dashboard/billing" target="_blank" class="pbtn pb-g">Upgrade to Pro</a>
+        <div class="ptier" style="color:var(--blue)">Explorer</div>
+        <div class="pval grad-text"><sup>$</sup>9<span style="font-size:16px;font-weight:500;color:var(--muted2)">/mo</span></div>
+        <div class="ptagline">100 wallet scans · @Handle claim</div>
+        <a href="pricing-b2c.html" class="pbtn pb-g">Start Explorer</a>
       </div>
       <div class="glass prcard">
-        <div class="ptier">Enterprise</div>
-        <div class="pval"><sup>$</sup>199</div>
-        <div class="pper">per month</div>
-        <div class="preq">Unlimited requests/month</div>
-        <div class="pfeat"><span class="pchk">✓</span>Unlimited requests</div>
-        <div class="pfeat"><span class="pchk">✓</span>Batch processing (unlimited)</div>
-        <div class="pfeat"><span class="pchk">✓</span>Custom SLA</div>
-        <div class="pfeat"><span class="pchk">✓</span>Dedicated support</div>
-        <div class="pfeat"><span class="pchk">✓</span>Custom integrations</div>
-        <a href="https://api.blockidscore.fun/dashboard/billing" target="_blank" class="pbtn pb-o">Contact Sales</a>
+        <div class="ptier" style="color:var(--indigo)">Pro</div>
+        <div class="pval"><sup>$</sup>29<span style="font-size:16px;font-weight:500;color:var(--muted2)">/mo</span></div>
+        <div class="ptagline">Unlimited scans · 3 handles · API access</div>
+        <a href="pricing-b2c.html" class="pbtn pb-o">Start Pro</a>
       </div>
     </div>
+    <div class="tc reveal"><a href="pricing-b2c.html" class="pcompact-link">View Full Pricing &amp; Feature Comparison →</a></div>
   </div>
 </section>
 
