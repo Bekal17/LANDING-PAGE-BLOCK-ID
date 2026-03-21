@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel="icon" type="image/svg+xml" href="blockid_logo.svg">
 <link rel="shortcut icon" href="blockid_logo.svg">
-<title>Privacy Policy — BlockID</title>
+<title>B2C Pricing — BlockID</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -24,12 +24,51 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--fg);font-family:var(--fm);font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 #bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 .grad-text{background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.glass{background:var(--surface);border:1px solid var(--border);border-radius:16px;backdrop-filter:blur(16px)}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;padding:0 24px;background:rgba(6,5,15,.8);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);transition:box-shadow .3s}
 nav.scrolled{box-shadow:0 4px 40px rgba(0,0,0,.6)}
 .nav-in{max-width:1280px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{font-family:var(--fd);font-weight:800;font-size:20px;text-decoration:none;display:flex;align-items:center;gap:8px;color:inherit}
 .logo-box{width:32px;height:32px;border-radius:8px;background:var(--grad);display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px -4px var(--glow-pur)}
 .btn-g{display:inline-flex;align-items:center;gap:8px;padding:9px 22px;border-radius:10px;background:var(--grad);color:#fff;font-family:var(--fd);font-weight:700;font-size:13px;text-decoration:none;box-shadow:0 0 28px -8px var(--glow-pur)}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:100px;margin-bottom:28px;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.3);font-size:12px;color:var(--indigo);font-family:var(--fm)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+.pricing-hero{padding:140px 24px 60px;text-align:center;position:relative;z-index:1}
+.pricing-hero .h1{font-family:var(--fd);font-weight:700;font-size:clamp(44px,8.5vw,72px);line-height:1.0;letter-spacing:-.03em;margin-bottom:24px}
+.pricing-hero .hp{font-size:18px;color:var(--muted2);max-width:580px;margin:0 auto 40px;line-height:1.75}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted2);text-decoration:none;margin-bottom:40px;transition:color .2s}
+.back-link:hover{color:var(--fg)}
+
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:960px;margin:0 auto;padding:0 24px 80px;position:relative;z-index:1}
+@media(max-width:768px){.pricing-grid{grid-template-columns:1fr}}
+.plan-card{padding:32px;border-radius:20px;position:relative;overflow:hidden;border:1px solid var(--border);background:var(--surface)}
+.plan-card.featured{border-color:rgba(56,189,248,.4);box-shadow:0 0 40px -12px rgba(56,189,248,.25)}
+.popular-tag{position:absolute;top:16px;right:16px;background:var(--grad);color:#fff;font-size:10px;font-weight:700;font-family:var(--fd);padding:4px 12px;border-radius:100px}
+.plan-tier{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
+.plan-price{font-family:var(--fd);font-size:52px;font-weight:800;line-height:1;margin-bottom:4px}
+.plan-price sup{font-size:22px;vertical-align:top;margin-top:10px}
+.plan-per{font-size:13px;color:var(--muted);margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.plan-feature{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted2);margin-bottom:10px}
+.plan-check{color:var(--blue);font-size:15px;flex-shrink:0}
+.plan-soon{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;background:rgba(124,58,237,.12);color:var(--indigo);margin-left:6px;vertical-align:middle;flex-shrink:0}
+.plan-btn{display:block;width:100%;padding:13px;border-radius:12px;text-align:center;font-family:var(--fd);font-weight:700;font-size:14px;text-decoration:none;margin-top:28px;transition:all .2s;border:none;cursor:pointer}
+.plan-btn-outline{background:transparent;border:1px solid var(--border);color:var(--muted2)}
+.plan-btn-outline:hover{border-color:rgba(56,189,248,.3);color:var(--fg)}
+.plan-btn-grad{background:var(--grad);color:#fff;box-shadow:0 8px 24px -8px rgba(124,58,237,.5)}
+.plan-btn-grad:hover{opacity:.9}
+
+/* FAQ */
+.faq-wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:10px;padding:0 24px 80px;position:relative;z-index:1}
+.faq-wrap .sh2{font-family:var(--fd);font-size:clamp(32px,5vw,56px);font-weight:700;letter-spacing:-.03em;margin-bottom:24px;text-align:center}
+.fitem{overflow:hidden}
+.fbtn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:20px 22px;background:none;border:none;cursor:pointer;text-align:left;font-family:var(--fd);font-weight:600;font-size:15px;color:var(--fg);gap:16px}
+.fchev{color:var(--muted2);flex-shrink:0;transition:transform .25s}
+.fchev.on{transform:rotate(180deg)}
+.fans{max-height:0;overflow:hidden;transition:max-height .35s ease,opacity .3s;opacity:0}
+.fans.on{max-height:250px;opacity:1}
+.fans p{padding:0 22px 20px;font-size:13px;color:var(--muted2);line-height:1.8}
+
 footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relative;z-index:1}
 .fin{max-width:1140px;margin:0 auto}
 .fgrid{display:grid;grid-template-columns:1.2fr repeat(4,1fr);gap:48px;margin-bottom:64px}
@@ -43,24 +82,11 @@ footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relati
 .fcol a:hover{color:var(--fg)}
 .fbot{border-top:1px solid var(--border);padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 .fcopy{font-size:12px;color:var(--muted)}
-.fleg{display:flex;gap:24px}
+.fleg{display:flex;flex-wrap:wrap;gap:24px}
 .fleg a{font-size:12px;color:var(--muted);text-decoration:none;transition:color .2s}
 .fleg a:hover{color:var(--fg)}
 .live-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.18);border-radius:8px;padding:5px 14px;font-size:11px;color:var(--blue);font-family:var(--fm);margin-top:20px}
 .ldot{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:pulse 1.5s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-
-.legal-wrap{max-width:760px;margin:0 auto;padding:120px 24px 80px}
-.legal-h1{font-family:var(--fd);font-size:clamp(32px,6vw,56px);font-weight:700;letter-spacing:-.03em;margin-bottom:8px}
-.legal-meta{font-size:13px;color:var(--muted);margin-bottom:56px;padding-bottom:24px;border-bottom:1px solid var(--border)}
-.legal-section{margin-bottom:40px}
-.legal-h2{font-family:var(--fd);font-size:20px;font-weight:700;margin-bottom:12px;color:var(--fg)}
-.legal-p{font-size:14px;color:var(--muted2);line-height:1.85;margin-bottom:12px}
-.legal-ul{padding-left:20px;margin-bottom:12px}
-.legal-ul li{font-size:14px;color:var(--muted2);line-height:1.85;margin-bottom:6px}
-.legal-contact{margin-top:56px;padding:24px;border:1px solid var(--border);border-radius:16px;background:var(--surface)}
-.back-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted2);text-decoration:none;margin-bottom:40px;transition:color .2s}
-.back-link:hover{color:var(--fg)}
 </style>
 </head>
 <body>
@@ -77,81 +103,65 @@ footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relati
   </div>
 </nav>
 
-<main style="position:relative;z-index:1">
-  <div class="legal-wrap">
-    <a href="index.html" class="back-link">← Back to BlockID</a>
-    <h1 class="legal-h1">Privacy Policy</h1>
-    <div class="legal-meta">Last updated: March 20, 2026 · BlockID · <a href="mailto:legal@blockidscore.fun" style="color:var(--blue)">legal@blockidscore.fun</a></div>
+<section class="pricing-hero">
+  <a href="index.html" class="back-link">← Back to BlockID</a>
+  <div class="badge">B2C · app.blockidscore.fun</div>
+  <h1 class="h1">Your On-Chain Identity.<br><span class="grad-text">Simple Pricing.</span></h1>
+  <p class="hp">Trust scores, @handles, NFT identity, and a Web3 social layer for every Solana wallet.</p>
+</section>
 
-    <div class="legal-section">
-      <h2 class="legal-h2">1. Information We Collect</h2>
-      <ul class="legal-ul">
-        <li>Solana wallet address (public, on-chain data)</li>
-        <li>Profile information: display name, bio, avatar, banner image</li>
-        <li>Social activity: posts, likes, follows, endorsements, bookmarks</li>
-        <li>Usage data: pages visited, features used, API calls made</li>
-        <li>Images you upload (stored on Cloudflare R2)</li>
-      </ul>
-    </div>
-
-    <div class="legal-section">
-      <h2 class="legal-h2">2. How We Use Information</h2>
-      <ul class="legal-ul">
-        <li>To provide trust scoring and identity scoring services</li>
-        <li>To display social profiles and feeds</li>
-        <li>To moderate content using Google Vision API</li>
-        <li>To improve platform performance and safety</li>
-        <li>To detect fraud, sybil attacks, and abuse</li>
-      </ul>
-    </div>
-
-    <div class="legal-section">
-      <h2 class="legal-h2">3. Data Sharing</h2>
-      <ul class="legal-ul">
-        <li>We do not sell user data to third parties</li>
-        <li>On-chain wallet data is public by nature of blockchain</li>
-        <li>Third-party services we use:
-          <ul style="margin-top:8px;list-style:disc">
-            <li>Helius: Solana RPC and transaction data</li>
-            <li>Google Vision API: image moderation (images checked, not stored by Google)</li>
-            <li>Cloudflare R2: image file storage</li>
-            <li>Railway: backend hosting</li>
-            <li>Paddle: payment processing (for B2B subscriptions)</li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-
-    <div class="legal-section">
-      <h2 class="legal-h2">4. Data Retention</h2>
-      <p class="legal-p">Profile data is retained as long as your account is active. You may request deletion by contacting us. On-chain data cannot be deleted as it is public blockchain data.</p>
-    </div>
-
-    <div class="legal-section">
-      <h2 class="legal-h2">5. Your Rights</h2>
-      <p class="legal-p">You have the right to access, correct, or delete your profile data. Contact legal@blockidscore.fun to exercise these rights.</p>
-    </div>
-
-    <div class="legal-section">
-      <h2 class="legal-h2">6. Cookies</h2>
-      <p class="legal-p">We use essential cookies for wallet session management and user preferences. See our <a href="cookies.html" style="color:var(--blue)">Cookie Policy</a> for details.</p>
-    </div>
-
-    <div class="legal-section">
-      <h2 class="legal-h2">7. Children's Privacy</h2>
-      <p class="legal-p">BlockID is not intended for users under 13 years of age. We do not knowingly collect data from children.</p>
-    </div>
-
-    <div class="legal-section">
-      <h2 class="legal-h2">8. Contact</h2>
-      <p class="legal-p">legal@blockidscore.fun</p>
-    </div>
-
-    <div class="legal-contact">
-      <p style="font-size:14px;color:var(--muted2)">Questions about this policy? Contact us at <a href="mailto:legal@blockidscore.fun" style="color:var(--blue)">legal@blockidscore.fun</a></p>
-    </div>
+<div class="pricing-grid">
+  <div class="glass plan-card">
+    <div class="plan-tier" style="color:var(--muted2)">FREE</div>
+    <div class="plan-price"><sup>$</sup>0</div>
+    <div class="plan-per">forever</div>
+    <div class="plan-feature"><span class="plan-check">✓</span> Public BlockID profile</div>
+    <div class="plan-feature"><span class="plan-check">✓</span> Trust score (realtime)</div>
+    <div class="plan-feature"><span class="plan-check">✓</span> 10 wallet scans/month</div>
+    <div class="plan-feature"><span class="plan-check">✓</span> Basic risk badges</div>
+    <div class="plan-feature"><span class="plan-check">✓</span> Unlimited posts &amp; social feed</div>
+    <div class="plan-feature"><span class="plan-check">✓</span> Avatar &amp; banner (photo + NFT)</div>
+    <div class="plan-feature"><span class="plan-check">✓</span> No credit card required</div>
+    <a href="https://app.blockidscore.fun" target="_blank" rel="noopener" class="plan-btn plan-btn-outline">Get Started Free</a>
   </div>
-</main>
+  <div class="glass plan-card featured">
+    <div class="popular-tag">Most Popular</div>
+    <div class="plan-tier" style="color:var(--blue)">EXPLORER</div>
+    <div class="plan-price"><span class="grad-text">$9</span></div>
+    <div class="plan-per">per month</div>
+    <div class="plan-feature"><span class="plan-check">✓</span> Everything in Free</div>
+    <div class="plan-feature"><span class="plan-check">✓</span> 100 wallet scans/month</div>
+    <div class="plan-feature"><span class="plan-check">✓</span> Full risk analysis &amp; wallet graph</div>
+    <div class="plan-feature"><span class="plan-check">✓</span> @Handle claim (1 handle)</div>
+    <div class="plan-feature">🔜 Export wallet report (PDF) <span class="plan-soon">Soon</span></div>
+    <div class="plan-feature">🔜 Priority score updates <span class="plan-soon">Soon</span></div>
+    <a href="https://app.blockidscore.fun" target="_blank" rel="noopener" class="plan-btn plan-btn-grad">Start Explorer</a>
+  </div>
+  <div class="glass plan-card">
+    <div class="plan-tier" style="color:var(--indigo)">PRO</div>
+    <div class="plan-price"><sup>$</sup>29</div>
+    <div class="plan-per">per month</div>
+    <div class="plan-feature"><span class="plan-check">✓</span> Everything in Explorer</div>
+    <div class="plan-feature"><span class="plan-check">✓</span> Unlimited wallet scans</div>
+    <div class="plan-feature"><span class="plan-check">✓</span> @Handle claim (up to 3 handles)</div>
+    <div class="plan-feature"><span class="plan-check">✓</span> Early access to new features</div>
+    <div class="plan-feature"><span class="plan-check">✓</span> Priority support</div>
+    <div class="plan-feature">🔜 API access (1,000 req/month) <span class="plan-soon">Soon</span></div>
+    <div class="plan-feature">🔜 Multi-wallet linking <span class="plan-soon">Soon</span></div>
+    <div class="plan-feature">🔜 Advanced behavioral analysis <span class="plan-soon">Soon</span></div>
+    <div class="plan-feature">🔜 Badge verification <span class="plan-soon">Soon</span></div>
+    <a href="https://app.blockidscore.fun" target="_blank" rel="noopener" class="plan-btn plan-btn-outline">Start Pro</a>
+  </div>
+</div>
+
+<p style="text-align:center;font-size:13px;color:var(--muted2);padding:0 24px 16px;position:relative;z-index:1">
+  All plans billed monthly. Annual billing with 20% discount coming soon.<br>Payments processed securely by <strong style="color:var(--fg)">Paddle</strong> — our Merchant of Record.
+</p>
+
+<section class="faq-wrap" id="faq-section">
+  <h2 class="sh2">FAQ</h2>
+  <div id="faq-root"></div>
+</section>
 
 <footer>
   <div class="fin">
@@ -180,6 +190,7 @@ footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relati
 </footer>
 
 <script>
+/* CANVAS */
 (function(){
   const c=document.getElementById('bg-canvas'),ctx=c.getContext('2d');
   let W,H,pts,mx=-9999,my=-9999;
@@ -196,9 +207,24 @@ footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relati
   window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;trail.push({x:mx,y:my,t:Date.now()});if(trail.length>TRAIL_LEN)trail.shift()},{passive:true});
   resize();init();loop()
 })();
+
+/* NAV */
 (function(){
   const nav=document.getElementById('nav');
   window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>20)},{passive:true});
+})();
+
+/* FAQ */
+(function(){
+  const faqs=[
+    {q:"What is a wallet scan?",a:"A wallet scan analyzes any Solana wallet for trust score, risk factors, behavioral patterns, cluster exposure, and on-chain history."},
+    {q:"Can I upgrade or downgrade anytime?",a:"Yes. Plan changes take effect immediately. Upgrading is prorated; downgrades apply at next billing cycle."},
+    {q:"Is my wallet data private?",a:"On-chain wallet data is public by nature of blockchain. Your profile settings, bio, and social posts are controlled by you. We never sell your data."},
+    {q:"What payment methods do you accept?",a:"All major credit and debit cards via Paddle, our secure Merchant of Record. No crypto payments at this time."}
+  ];
+  const root=document.getElementById('faq-root');
+  faqs.forEach((f,i)=>{const d=document.createElement('div');d.className='glass fitem';d.innerHTML=`<button class="fbtn" onclick="tFaq(${i},this)"><span>${f.q}</span><svg class="fchev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg></button><div class="fans" id="ff${i}"><p>${f.a}</p></div>`;root.appendChild(d)});
+  window.tFaq=(i,btn)=>{const a=document.getElementById('ff'+i),ch=btn.querySelector('.fchev'),o=a.classList.contains('on');document.querySelectorAll('.fans').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.fchev').forEach(x=>x.classList.remove('on'));if(!o){a.classList.add('on');ch.classList.add('on')}}
 })();
 </script>
 </body>
