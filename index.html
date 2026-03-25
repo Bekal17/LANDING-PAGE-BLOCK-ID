@@ -452,13 +452,6 @@ footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relati
   btns.forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.s)?.scrollIntoView({behavior:'smooth'})));
 })();
 
-/* CODE */
-(function(){
-  const src=`// No SDK needed — plain fetch works\nconst apiKey = process.env.BLOCKID_API_KEY;\n\n// Single wallet score\nconst res = await fetch(\n  'https://blockid-backend-production.up.railway.app/v1/score/7TPgh8Lfkb7ss2KnKaswQLtMJZabtMFiHnb3s5uhgN3p',\n  { headers: { 'X-API-Key': apiKey } }\n);\n\nconst score = await res.json();\nconsole.log(score);\n// {\n//   address: '7TPgh8...gN3p',\n//   trustScore: 47,\n//   level: 'MEDIUM',\n//   riskFactors: ['SCAM_CLUSTER']\n// }`;
-  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  document.getElementById('cpre').innerHTML=src.split('\n').map((l,i)=>{let c='lx';if(l.trimStart().startsWith('//'))c='lc';else if(/['"]/.test(l))c='ls';else if(/^(import|const|await)/.test(l.trim()))c='lk';return`<div class="ln-row"><span class="lno">${i+1}</span><span class="${c}">${esc(l)||' '}</span></div>`}).join('')
-})();
-
 /* COUNTER */
 function animCounter(el){
   const tgt=parseFloat(el.dataset.target),sfx=el.dataset.suffix||'',dec=parseInt(el.dataset.dec||0),dur=2200,st=performance.now();
