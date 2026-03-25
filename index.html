@@ -229,7 +229,6 @@ footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relati
     <div class="nav-links">
       <button class="nbtn" data-s="product">Product</button>
       <button class="nbtn" data-s="docs">Docs</button>
-      <button class="nbtn" data-s="api">API</button>
       <button class="nbtn" data-s="roadmap">Roadmap</button>
       <button class="nbtn" data-s="pricing">Pricing</button>
       <button class="nbtn" data-s="faq">FAQ</button>
@@ -251,10 +250,6 @@ footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relati
       <a href="https://app.blockidscore.fun" target="_blank" rel="noopener" class="btn-g">
         Launch App <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
       </a>
-      <a href="https://api.blockidscore.fun" target="_blank" rel="noopener" class="btn-o">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        API Dashboard
-      </a>
     </div>
     <div class="stats-row fu d5">
       <div class="st"><div class="sv">Solana First</div><div class="sl">Built Here</div></div>
@@ -262,7 +257,7 @@ footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relati
       <div class="st"><div class="sv">Privacy First</div><div class="sl">No Data Selling</div></div>
     </div>
     <div class="fu d6" style="text-align:center">
-      <div class="live-badge"><span class="ldot"></span>Devnet · app.blockidscore.fun &nbsp;·&nbsp; api.blockidscore.fun</div>
+      <div class="live-badge"><span class="ldot"></span>Devnet · app.blockidscore.fun</div>
     </div>
   </div>
 </section>
@@ -276,7 +271,7 @@ footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relati
     <div class="ti"><strong>Smart Router</strong> · "Send 100 USDC to @bee121"</div><div class="tsep">·</div>
     <div class="ti"><strong>Sybil Resistance</strong> · Built-in</div><div class="tsep">·</div>
     <div class="ti"><strong>Social Layer</strong> · Web3-native</div><div class="tsep">·</div>
-    <div class="ti"><strong>Devnet</strong> · Mainnet Coming Soon</div><div class="tsep">·</div>
+    <div class="ti"><strong>Mainnet</strong> · Live</div><div class="tsep">·</div>
     <div class="ti"><strong>Free Tier</strong> · 100 req/mo</div><div class="tsep">·</div>
     <!-- duplicate -->
     <div class="ti"><strong>@handle</strong> = Your Wallet</div><div class="tsep">·</div>
@@ -285,7 +280,7 @@ footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relati
     <div class="ti"><strong>Smart Router</strong> · "Send 100 USDC to @bee121"</div><div class="tsep">·</div>
     <div class="ti"><strong>Sybil Resistance</strong> · Built-in</div><div class="tsep">·</div>
     <div class="ti"><strong>Social Layer</strong> · Web3-native</div><div class="tsep">·</div>
-    <div class="ti"><strong>Devnet</strong> · Mainnet Coming Soon</div><div class="tsep">·</div>
+    <div class="ti"><strong>Mainnet</strong> · Live</div><div class="tsep">·</div>
     <div class="ti"><strong>Free Tier</strong> · 100 req/mo</div><div class="tsep">·</div>
   </div>
 </div>
@@ -323,42 +318,13 @@ footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relati
   </div>
 </section>
 
-<!-- API -->
-<section id="api" class="section">
-  <div class="wrap">
-    <div class="tc reveal"><p class="stag">API Reference</p><h2 class="sh2">One API. Full Stack Identity.</h2><p class="ssub">RESTful endpoints for trust scoring, behavioral analysis, and wallet identity, all on Solana.</p></div>
-    <div class="reveal">
-      <div class="glass acard"><div class="ahdr"><div class="arow"><span class="mget">GET</span><span class="apath">/v1/score/{wallet}</span></div><p class="adesc">Get AI trust score and behavioral analysis for any Solana wallet</p></div><div class="acode"><pre>{
-  "address": "7TPgh8Lfkb7ss2KnKaswQLtMJZabtMFiHnb3s5uhgN3p",
-  "trustScore": 47,
-  "level": "MEDIUM",
-  "riskFactors": ["SCAM_CLUSTER"],
-  "propagationSignal": "HIGH",
-  "category": "SCAM_CLUSTER",
-  "network": "devnet"
-}</pre></div></div>
-      <div class="glass acard"><div class="ahdr"><div class="arow"><span class="mpost">POST</span><span class="apath">/v1/score/batch</span></div><p class="adesc">Score up to 50 wallets in a single request ideal for sybil detection</p></div><div class="acode"><pre>{
-  "results": [
-    { "address": "7TPgh8...", "trustScore": 47, "level": "MEDIUM" },
-    { "address": "GPQg...",   "trustScore": 20, "level": "HIGH_RISK" }
-  ],
-  "processed": 2,
-  "network": "devnet"
-}</pre></div></div>
-    </div>
-    <div class="tc reveal" style="margin-top:32px">
-      <a href="https://api.blockidscore.fun" target="_blank" rel="noopener" class="btn-g">Open API Dashboard <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></a>
-    </div>
-  </div>
-</section>
-
 <!-- ROADMAP -->
 <section id="roadmap" class="section">
   <div class="wrap">
     <div class="tc reveal"><p class="stag">Roadmap</p><h2 class="sh2">Building the Identity Protocol</h2></div>
     <div class="rgrid reveal">
       <div class="rline"></div>
-      <div><div class="pdot d-done"></div><div class="glass pcard"><span class="plbl pc-done">Phase 1</span><h3 class="ph3">Foundation</h3><div class="pitem"><span class="pbul" style="background:var(--blue)"></span>Trust Score engine (ML)</div><div class="pitem"><span class="pbul" style="background:var(--blue)"></span>Wallet risk analysis</div><div class="pitem"><span class="pbul" style="background:var(--blue)"></span>B2B API + Dashboard</div><div class="pitem"><span class="pbul" style="background:var(--blue)"></span>Devnet deployment</div><div class="pst" style="color:var(--blue)">✓ Complete</div></div></div>
+      <div><div class="pdot d-done"></div><div class="glass pcard"><span class="plbl pc-done">Phase 1</span><h3 class="ph3">Foundation</h3><div class="pitem"><span class="pbul" style="background:var(--blue)"></span>Trust Score engine (ML)</div><div class="pitem"><span class="pbul" style="background:var(--blue)"></span>Wallet risk analysis</div><div class="pitem"><span class="pbul" style="background:var(--blue)"></span>Devnet deployment</div><div class="pst" style="color:var(--blue)">✓ Complete</div></div></div>
       <div><div class="pdot d-act"></div><div class="glass glow-card pcard"><span class="plbl pc-act">Phase 2</span><h3 class="ph3">Identity</h3><div class="pitem"><span class="pbul" style="background:var(--indigo)"></span>Mainnet Launch</div><div class="pitem"><span class="pbul" style="background:var(--indigo)"></span>Positive Reputation Scoring</div><div class="pitem"><span class="pbul" style="background:var(--indigo)"></span>NFT identity profiles</div><div class="pitem"><span class="pbul" style="background:var(--indigo)"></span>@handle → wallet registry</div><div class="pitem"><span class="pbul" style="background:var(--indigo)"></span>Behavioral identity AI</div><div class="pitem"><span class="pbul" style="background:var(--indigo)"></span>Sybil resistance scoring</div><div class="pst" style="color:var(--indigo)">● In Progress</div></div></div>
       <div><div class="pdot d-soon"></div><div class="glass pcard"><span class="plbl pc-soon">Phase 3</span><h3 class="ph3">Transact</h3><div class="pitem"><span class="pbul" style="background:var(--muted)"></span>Smart Router ("Send to @bee121")</div><div class="pitem"><span class="pbul" style="background:var(--muted)"></span>NLP transaction interface</div><div class="pitem"><span class="pbul" style="background:var(--muted)"></span>CEX + DEX router fingerprint</div><div class="pitem"><span class="pbul" style="background:var(--muted)"></span>Mainnet launch</div></div></div>
       <div><div class="pdot d-soon"></div><div class="glass pcard"><span class="plbl pc-soon">Phase 4</span><h3 class="ph3">Social</h3><div class="pitem"><span class="pbul" style="background:var(--muted)"></span>Reputation-gated social feed</div><div class="pitem"><span class="pbul" style="background:var(--muted)"></span>Badge &amp; coin holder access</div><div class="pitem"><span class="pbul" style="background:var(--muted)"></span>On-chain messaging</div><div class="pitem"><span class="pbul" style="background:var(--muted)"></span>Cross-protocol trust mesh</div></div></div>
@@ -375,7 +341,7 @@ footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relati
         <div class="ptier" style="color:var(--muted2)">Free</div>
         <div class="pval"><sup>$</sup>0<span style="font-size:16px;font-weight:500;color:var(--muted2)">/mo</span></div>
         <div class="ptagline">100 req/month · No card needed</div>
-        <a href="https://api.blockidscore.fun" target="_blank" rel="noopener" class="pbtn pb-o">Get Started</a>
+        <a href="https://app.blockidscore.fun" target="_blank" rel="noopener" class="pbtn pb-o">Get Started</a>
       </div>
       <div class="glass glow-card prcard">
         <div class="popular">Most Popular</div>
@@ -413,7 +379,7 @@ footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relati
         <div class="live-badge" style="margin-top:14px"><span class="ldot"></span>Devnet · blockidscore.fun</div>
       </div>
       <div class="fcol"><h4>Product</h4><ul><li><a href="#">NFT Identity</a></li><li><a href="#">@Handle Registry</a></li><li><a href="#">Trust Score</a></li><li><a href="#">Smart Router</a></li><li><a href="#">Social Layer</a></li></ul></div>
-      <div class="fcol"><h4>Developers</h4><ul><li><a href="https://api.blockidscore.fun" target="_blank">Documentation</a></li><li><a href="https://api.blockidscore.fun" target="_blank">API Reference</a></li><li><a href="#">SDK</a></li><li><a href="#">Changelog</a></li><li><a href="#">Status</a></li></ul></div>
+      <div class="fcol"><h4>Developers</h4><ul><li><a href="#">SDK</a></li><li><a href="#">Changelog</a></li><li><a href="#">Status</a></li></ul></div>
       <div class="fcol"><h4>Community</h4><ul><li><a href="https://x.com/BlockID_AI" target="_blank" rel="noopener">Twitter</a></li><li><a href="https://github.com/Bekal17" target="_blank" rel="noopener">GitHub</a></li></ul></div>
       <div class="fcol"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Press Kit</a></li><li><a href="#">Contact</a></li><li><a href="terms.html">Terms</a></li><li><a href="pricing-b2c.html">B2C Pricing</a></li></ul></div>
     </div>
@@ -525,7 +491,7 @@ function animCounter(el){
     {q:"What does 'wallet ≠ identity' mean?",a:"A single person can own 50 wallets. A wallet address alone tells you nothing about who someone really is. BlockID builds a behavioral identity layer on top of wallets linking patterns, reputation, and social context without revealing personal data."},
     {q:"How does the AI Trust Score work?",a:"Our ML engine analyzes on-chain behavioral signals: transaction patterns, counterparty networks, routing habits (which DEX/CEX they use), timing patterns, and token behavior. The result is a trust score between 0–100 with risk category classification."},
     {q:"What is Behavioral Identity Linking?",a:"Without KYC, BlockID can infer that two wallets likely belong to the same person by analyzing shared behavioral fingerprints, same CEX deposit patterns, same router preferences, same timing, same counterparties. Output is a probability score, not a public claim."},
-    {q:"Is blockID live?",a:"The trust scoring API and B2B dashboard are live at api.blockidscore.fun and app.blockidscore.fun on Solana devnet. NFT identity, @handles, Smart Router, and Social Layer are in active development (Phase 2–4)."},
+    {q:"Is blockID live?",a:"The platform is live at app.blockidscore.fun on Solana devnet. NFT identity, @handles, Smart Router, and Social Layer are in active development (Phase 2–4)."},
     {q:"Is there a free tier?",a:"Yes. BlockID offers a free tier with 100 API calls/month, sandbox mode, and basic trust score queries. Pro plan at $29/mo includes 50,000 requests. Enterprise at $199/mo is fully unlimited."},
   ];
   const root=document.getElementById('faq-root');
