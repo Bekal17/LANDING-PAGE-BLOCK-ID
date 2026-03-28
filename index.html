@@ -251,9 +251,9 @@ footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relati
       </a>
     </div>
     <div class="stats-row fu d5">
-      <div class="st"><div class="sv">Solana First</div><div class="sl">Built Here</div></div>
-      <div class="st"><div class="sv">Behavior Based</div><div class="sl">Not ID-Based</div></div>
-      <div class="st"><div class="sv">Privacy First</div><div class="sl">No Data Selling</div></div>
+      <div class="st"><div class="sv" id="stat-users">5</div><div class="sl">Wallets Onboarded</div></div>
+      <div class="st"><div class="sv" id="stat-scans">43</div><div class="sl">Wallets Scanned</div></div>
+      <div class="st"><div class="sv" id="stat-posts">3</div><div class="sl">Posts Created</div></div>
     </div>
     <div class="fu d6" style="text-align:center">
       <div class="live-badge"><span class="ldot"></span>Mainnet · app.blockidscore.fun</div>
@@ -597,6 +597,16 @@ function animCounter(el){
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
   setTimeout(()=>document.querySelectorAll('.counter').forEach(animCounter),700)
 })();
+</script>
+<script>
+fetch('https://blockid-backend-production.up.railway.app/stats')
+  .then(r => r.json())
+  .then(d => {
+    document.getElementById('stat-users').textContent = d.total_users;
+    document.getElementById('stat-scans').textContent = d.total_scans;
+    document.getElementById('stat-posts').textContent = d.total_posts;
+  })
+  .catch(() => {});
 </script>
 </body>
 </html>
