@@ -40,7 +40,8 @@
   --fg:        #f0f8ff;
   --muted:     #64748b;
   --muted2:    #94a3b8;
-  --grad:      linear-gradient(135deg,#7c3aed,#0ea5e9);
+  --grad:      linear-gradient(135deg,#0ea5e9,#38bdf8);
+  --grad-accent: linear-gradient(135deg,#7c3aed,#0ea5e9);
   --grad2:     linear-gradient(135deg,#38bdf8,#818cf8);
   --glow-blue: rgba(56,189,248,0.3);
   --glow-pur:  rgba(124,58,237,0.3);
@@ -68,12 +69,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;ali
 nav.scrolled{box-shadow:0 4px 40px rgba(0,0,0,.6)}
 .nav-in{max-width:1280px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{font-family:var(--fd);font-weight:800;font-size:20px;text-decoration:none;display:flex;align-items:center;gap:8px}
-.logo-box{width:32px;height:32px;border-radius:8px;background:var(--grad);display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px -4px var(--glow-pur)}
+.logo-box{width:32px;height:32px;border-radius:8px;background:var(--grad);display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px -4px var(--glow-blue)}
 .nav-links{display:flex;align-items:center;gap:2px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:4px}
 .nbtn{padding:6px 16px;border-radius:9px;border:none;background:transparent;color:var(--muted2);font-family:var(--fm);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
 .nbtn:hover{color:var(--fg);background:rgba(255,255,255,.06)}
 .nbtn.on{background:rgba(56,189,248,.12);color:var(--blue)}
-.btn-g{display:inline-flex;align-items:center;gap:8px;padding:9px 22px;border-radius:10px;background:var(--grad);color:#fff;font-family:var(--fd);font-weight:700;font-size:13px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 0 28px -8px var(--glow-pur);transition:opacity .2s,box-shadow .2s}
+.btn-g{display:inline-flex;align-items:center;gap:8px;padding:9px 22px;border-radius:10px;background:var(--grad-accent);color:#fff;font-family:var(--fd);font-weight:700;font-size:13px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 0 28px -8px var(--glow-pur);transition:opacity .2s,box-shadow .2s}
 .btn-g:hover{opacity:.9;box-shadow:0 0 40px -4px var(--glow-blue)}
 .btn-o{display:inline-flex;align-items:center;gap:8px;padding:9px 22px;border-radius:10px;background:transparent;color:var(--muted2);font-family:var(--fd);font-weight:600;font-size:13px;border:1px solid var(--border);cursor:pointer;transition:all .2s;text-decoration:none}
 .btn-o:hover{color:var(--fg);border-color:rgba(56,189,248,.3)}
@@ -102,7 +103,7 @@ nav.scrolled{box-shadow:0 4px 40px rgba(0,0,0,.6)}
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* SECTIONS */
-.stag{font-family:var(--fm);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
+.stag{font-family:var(--fm);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
 .sh2{font-family:var(--fd);font-size:clamp(24px,3.5vw,39px);font-weight:700;letter-spacing:-.03em;margin-bottom:16px}
 .ssub{color:var(--muted2);max-width:500px;margin:0 auto 64px;line-height:1.618;font-size:15px}
 .tc{text-align:center}
@@ -110,7 +111,7 @@ nav.scrolled{box-shadow:0 4px 40px rgba(0,0,0,.6)}
 /* PRODUCT */
 .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
 .pc{padding:28px}
-.ibox{width:46px;height:46px;border-radius:12px;background:var(--grad);display:flex;align-items:center;justify-content:center;margin-bottom:18px;box-shadow:0 8px 24px -8px var(--glow-pur)}
+.ibox{width:46px;height:46px;border-radius:12px;background:var(--grad);display:flex;align-items:center;justify-content:center;margin-bottom:18px;box-shadow:0 8px 24px -8px var(--glow-blue)}
 .ch3{font-family:var(--fd);font-weight:700;font-size:17px;margin-bottom:8px}
 .cp{font-size:13px;color:var(--muted2);line-height:1.7}
 
@@ -172,7 +173,7 @@ pre{font-family:var(--fm);font-size:12.5px;line-height:1.8}
 .pbtn{display:block;width:100%;padding:12px;border-radius:10px;text-align:center;font-family:var(--fd);font-weight:700;font-size:14px;cursor:pointer;border:none;margin-top:0;transition:all .2s;text-decoration:none}
 .pb-o{background:transparent;border:1px solid var(--border);color:var(--muted2)}
 .pb-o:hover{border-color:rgba(56,189,248,.3);color:var(--fg)}
-.pb-g{background:var(--grad);color:#fff;box-shadow:0 8px 24px -8px var(--glow-pur)}
+.pb-g{background:var(--grad);color:#fff;box-shadow:0 8px 24px -8px var(--glow-blue)}
 .pb-g:hover{opacity:.9}
 .pcompact-link{display:inline-block;margin-top:32px;font-size:13px;color:var(--blue);text-decoration:none;transition:color .2s}
 .pcompact-link:hover{color:var(--blue-mid)}
@@ -364,10 +365,10 @@ footer{border-top:1px solid var(--border);padding:64px 24px 32px;position:relati
       </div>
       <div style="position:relative;display:flex;align-items:center;justify-content:center;">
         <div style="width:240px;height:240px;border-radius:24px;background:var(--surface);border:3px solid gold;box-shadow:0 0 60px rgba(255,215,0,0.3),0 0 120px rgba(124,58,237,0.2);display:flex;align-items:center;justify-content:center;position:relative;">
-          <div style="width:160px;height:160px;border-radius:16px;background:linear-gradient(135deg,#7c3aed,#0ea5e9);display:flex;align-items:center;justify-content:center;">
+          <div style="width:160px;height:160px;border-radius:16px;background:linear-gradient(135deg,#0ea5e9,#38bdf8);display:flex;align-items:center;justify-content:center;">
             <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="12" cy="10" r="3"/><path d="M6 21v-1a6 6 0 0 1 12 0v1"/></svg>
           </div>
-        <div style="position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#7c3aed,#0ea5e9);color:white;font-size:11px;font-weight:700;padding:6px 16px;border-radius:100px;white-space:nowrap;font-family:var(--fd);">Pick Your Real NFT · Set On Your Profile</div>
+        <div style="position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#0ea5e9,#38bdf8);color:white;font-size:11px;font-weight:700;padding:6px 16px;border-radius:100px;white-space:nowrap;font-family:var(--fd);">Pick Your Real NFT · Set On Your Profile</div>
         </div>
         <div style="position:absolute;top:-20px;right:-20px;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.3);border-radius:12px;padding:8px 14px;font-size:11px;color:var(--blue);font-family:var(--fd);font-weight:700;">@blockid</div>
         <div style="position:absolute;bottom:10px;left:-24px;background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:8px 14px;font-size:11px;color:var(--indigo);font-family:var(--fd);font-weight:700;">Score: 74</div>
