@@ -22,7 +22,7 @@
   --fd:'ClashDisplay',sans-serif;--fm:'Inter',sans-serif;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--fg);font-family:var(--fm);font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--fg);font-family:var(--fm);font-size:15px;line-height:1.618;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 #bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 .grad-text{background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .glass{background:var(--surface);border:1px solid var(--border);border-radius:16px;backdrop-filter:blur(16px)}
@@ -38,8 +38,8 @@ nav.scrolled{box-shadow:0 4px 40px rgba(0,0,0,.6)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 
 .pricing-hero{padding:120px 24px 60px;text-align:center;position:relative;z-index:1}
-.pricing-hero .h1{font-family:var(--fd);font-weight:700;font-size:clamp(44px,8.5vw,72px);line-height:1.0;letter-spacing:-.03em;margin-bottom:24px}
-.pricing-hero .hp{font-size:18px;color:var(--muted2);max-width:580px;margin:0 auto 40px;line-height:1.75}
+.pricing-hero .h1{font-family:var(--fd);font-weight:700;font-size:clamp(39px,6vw,63px);line-height:1.0;letter-spacing:-.03em;margin-bottom:24px}
+.pricing-hero .hp{font-size:16px;color:var(--muted2);max-width:580px;margin:0 auto 40px;line-height:1.618}
 
 .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:960px;margin:0 auto;padding:0 24px 80px;position:relative;z-index:1}
 @media(max-width:768px){.pricing-grid{grid-template-columns:1fr}}
@@ -61,7 +61,7 @@ nav.scrolled{box-shadow:0 4px 40px rgba(0,0,0,.6)}
 
 /* FAQ */
 .faq-wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:10px;padding:0 24px 80px;position:relative;z-index:1}
-.faq-wrap .sh2{font-family:var(--fd);font-size:clamp(32px,5vw,56px);font-weight:700;letter-spacing:-.03em;margin-bottom:24px;text-align:center}
+.faq-wrap .sh2{font-family:var(--fd);font-size:clamp(24px,3.5vw,39px);font-weight:700;letter-spacing:-.03em;margin-bottom:24px;text-align:center}
 .fitem{overflow:hidden}
 .fbtn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:20px 22px;background:none;border:none;cursor:pointer;text-align:left;font-family:var(--fd);font-weight:600;font-size:15px;color:var(--fg);gap:16px}
 .fchev{color:var(--muted2);flex-shrink:0;transition:transform .25s}
