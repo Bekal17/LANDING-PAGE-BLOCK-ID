@@ -195,6 +195,28 @@ p code, li code{background:rgba(56,189,248,.08);color:var(--blue);padding:2px 7p
 .reveal{opacity:0;animation:fadeUp .6s ease forwards}
 .d1{animation-delay:.05s}.d2{animation-delay:.1s}.d3{animation-delay:.15s}.d4{animation-delay:.2s}
 
+/* ── RIGHT SIDEBAR (TOC) ── */
+.toc{position:fixed;top:calc(var(--nav-h) + 40px);right:max(24px,calc((100vw - var(--sidebar-w) - 760px)/2 - 220px));width:200px;z-index:40}
+.toc-label{font-size:9.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px}
+.toc-links{display:flex;flex-direction:column;gap:2px;margin-bottom:24px}
+.toc-links a{font-size:12px;color:var(--muted);text-decoration:none;padding:4px 12px;border-left:1.5px solid rgba(255,255,255,.06);transition:all .15s;line-height:1.5}
+.toc-links a:hover{color:var(--muted2);border-left-color:rgba(56,189,248,.3)}
+.toc-links a.toc-active{color:var(--blue);border-left-color:var(--blue);font-weight:500}
+
+.toc-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin-top:20px;backdrop-filter:blur(16px)}
+.toc-card .tc-title{font-family:var(--fd);font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.toc-card .tc-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.03)}
+.toc-card .tc-row:last-child{border-bottom:none}
+.toc-card .tc-label{font-size:11.5px;color:var(--muted2)}
+.toc-card .tc-value{font-family:var(--fd);font-size:12px;font-weight:700}
+.toc-card .tc-value.blue{color:var(--blue)}
+.toc-card .tc-value.green{color:#34d399}
+.toc-card .tc-value.purple{color:var(--indigo)}
+.toc-card .tc-links{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.toc-card .tc-links a{font-size:11.5px;color:var(--blue);text-decoration:none;display:flex;align-items:center;gap:6px;transition:opacity .2s}
+.toc-card .tc-links a:hover{opacity:.7}
+.toc-card .tc-links a svg{width:12px;height:12px;flex-shrink:0}
+
 /* ── MOBILE ── */
 @media(max-width:900px){
   .sidebar{transform:translateX(-100%)}
@@ -204,6 +226,11 @@ p code, li code{background:rgba(56,189,248,.08);color:var(--blue);padding:2px 7p
   .nav-links{display:none}
   .feat-grid{grid-template-columns:1fr}
   .price-grid{grid-template-columns:1fr}
+  .toc{display:none}
+}
+
+@media(max-width:1200px){
+  .toc{display:none}
 }
 
 @media(max-width:640px){
@@ -722,6 +749,50 @@ p code, li code{background:rgba(56,189,248,.08);color:var(--blue);padding:2px 7p
 
 </div>
 
+<!-- RIGHT SIDEBAR: Table of Contents + Info Card -->
+<aside class="toc" id="toc">
+  <div class="toc-label">On this page</div>
+  <div class="toc-links" id="toc-links"></div>
+
+  <div class="toc-card">
+    <div class="tc-title">BlockID Status</div>
+    <div class="tc-row">
+      <span class="tc-label">Network</span>
+      <span class="tc-value green">Mainnet</span>
+    </div>
+    <div class="tc-row">
+      <span class="tc-label">Users</span>
+      <span class="tc-value blue" id="toc-users">—</span>
+    </div>
+    <div class="tc-row">
+      <span class="tc-label">Scans</span>
+      <span class="tc-value blue" id="toc-scans">—</span>
+    </div>
+    <div class="tc-row">
+      <span class="tc-label">Posts</span>
+      <span class="tc-value blue" id="toc-posts">—</span>
+    </div>
+    <div class="tc-row">
+      <span class="tc-label">Phase</span>
+      <span class="tc-value purple">3 — Transact</span>
+    </div>
+    <div class="tc-links">
+      <a href="https://app.blockidscore.fun" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Launch App
+      </a>
+      <a href="https://x.com/BlockID_AI" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 12 7.5v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+        @BlockID_AI
+      </a>
+      <a href="https://github.com/Bekal17" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</aside>
+
 <!-- SIDEBAR ACTIVE STATE -->
 <script>
 (function(){
@@ -796,6 +867,88 @@ p code, li code{background:rgba(56,189,248,.08);color:var(--blue);padding:2px 7p
   window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;trail.push({x:mx,y:my,t:Date.now()});if(trail.length>TRAIL_LEN)trail.shift()},{passive:true});
   resize();init();loop()
 })();
+</script>
+<script>
+// Dynamic TOC: auto-generate "On this page" links from current visible section
+(function(){
+  const tocLinks=document.getElementById('toc-links');
+  const sections=document.querySelectorAll('.doc-section');
+  const sidebarLinks=document.querySelectorAll('.sb-link');
+  
+  function buildTOC(sectionId){
+    tocLinks.innerHTML='';
+    const section=document.getElementById(sectionId);
+    if(!section)return;
+    
+    // Add section title (h1)
+    const h1=section.querySelector('h1');
+    if(h1){
+      const a=document.createElement('a');
+      a.href='#'+sectionId;
+      a.textContent=h1.textContent;
+      a.style.fontWeight='600';
+      a.style.color='var(--fg)';
+      tocLinks.appendChild(a);
+    }
+    
+    // Add h2 and h3 headings
+    section.querySelectorAll('h2, h3').forEach(h=>{
+      const id=h.textContent.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/-$/,'');
+      h.id=id;
+      const a=document.createElement('a');
+      a.href='#'+id;
+      a.textContent=h.textContent;
+      if(h.tagName==='H3')a.style.paddingLeft='24px';
+      tocLinks.appendChild(a);
+    });
+  }
+  
+  // Highlight active TOC link on scroll
+  function updateTOCActive(){
+    const links=tocLinks.querySelectorAll('a');
+    let active='';
+    links.forEach(a=>{
+      const id=a.getAttribute('href').substring(1);
+      const el=document.getElementById(id);
+      if(el&&el.getBoundingClientRect().top<=120)active=id;
+    });
+    links.forEach(a=>a.classList.toggle('toc-active',a.getAttribute('href')==='#'+active));
+  }
+  
+  // Detect which main section is in view and rebuild TOC
+  function detectSection(){
+    let current='overview';
+    sections.forEach(s=>{
+      if(s.getBoundingClientRect().top<=120)current=s.id;
+    });
+    return current;
+  }
+  
+  let lastSection='';
+  function onScroll(){
+    const cur=detectSection();
+    if(cur!==lastSection){
+      lastSection=cur;
+      buildTOC(cur);
+    }
+    updateTOCActive();
+  }
+  
+  window.addEventListener('scroll',onScroll,{passive:true});
+  
+  // Initial build
+  buildTOC('overview');
+})();
+
+// Fetch live stats for info card
+fetch('https://blockid-backend-production.up.railway.app/stats')
+  .then(r=>r.json())
+  .then(d=>{
+    if(d.total_users)document.getElementById('toc-users').textContent=d.total_users;
+    if(d.total_scans)document.getElementById('toc-scans').textContent=d.total_scans;
+    if(d.total_posts)document.getElementById('toc-posts').textContent=d.total_posts;
+  })
+  .catch(()=>{});
 </script>
 </body>
 </html>
