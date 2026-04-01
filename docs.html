@@ -320,6 +320,10 @@ p code, li code{background:rgba(56,189,248,.08);color:var(--blue);padding:2px 7p
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
       Architecture
     </a>
+    <a href="#smart-router" class="sb-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      Smart Router
+    </a>
   </div>
 </aside>
 
@@ -759,6 +763,129 @@ p code, li code{background:rgba(56,189,248,.08);color:var(--blue);padding:2px 7p
         <tr><td><strong>Blockchain</strong></td><td>Solana Mainnet via Helius RPC</td></tr>
       </tbody>
     </table>
+  </section>
+
+  <!-- SMART ROUTER -->
+  <section id="smart-router" class="doc-section reveal">
+    <h1>Smart Router</h1>
+    <p>Send crypto to anyone using just their <code>@handle</code> — powered by AI that understands natural language in 100+ languages. No wallet addresses, no complexity.</p>
+
+    <div class="info-card blue">
+      <div class="ic-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Type it like you'd say it
+      </div>
+      <p>Just type what you want to do — in any language. BlockID's AI understands your intent and executes the transaction. No forms, no dropdowns, no copy-pasting addresses.</p>
+    </div>
+
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <div></div>
+        <div class="step-content">
+          <h4>Type Your Intent</h4>
+          <p>Write what you want in natural language: <code>send 1 SOL to @blockid</code> or <code>kirim 100 USDC ke @bee121</code></p>
+        </div>
+      </div>
+      <div class="step">
+        <div></div>
+        <div class="step-content">
+          <h4>AI Parses &amp; Resolves</h4>
+          <p>BlockID's AI extracts the amount, token, and recipient — then resolves the @handle to a wallet address and shows you their trust score and profile.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div></div>
+        <div class="step-content">
+          <h4>Review &amp; Confirm</h4>
+          <p>See the recipient's profile, trust score, badges, and fee breakdown. If the recipient has a low trust score, you'll get a warning before sending.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div></div>
+        <div class="step-content">
+          <h4>One Signature, Done</h4>
+          <p>Confirm in your Phantom wallet — one signature, transaction complete. Auto-swap via Jupiter if you're sending a different token than what you hold.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>Supported Commands</h2>
+    <table class="doc-table">
+      <thead><tr><th>Intent</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Send / Transfer</strong></td><td><code>send 1 SOL to @blockid</code> · <code>kirim 100 USDC ke @bee121</code> · <code>bayar @blockid 50 dolar</code></td></tr>
+        <tr><td><strong>Check Profile</strong></td><td><code>siapa @blockid?</code> · <code>who is @bee121</code> · <code>cek score @blockid</code></td></tr>
+        <tr><td><strong>Check Balance</strong></td><td><code>berapa saldo aku?</code> · <code>my balance</code> · <code>how much SOL do I have</code></td></tr>
+        <tr><td><strong>Swap Token</strong></td><td><code>tukar 1 SOL ke USDC</code> · <code>swap 100 USDC to SOL</code></td></tr>
+        <tr><td><strong>Partial Amount</strong></td><td><code>send half my SOL to @blockid</code> · <code>kirim semua USDC ke @bee121</code></td></tr>
+      </tbody>
+    </table>
+
+    <h2>100+ Languages Supported</h2>
+    <p>Smart Router's AI parser is powered by GPT-4o-mini, which natively understands 100+ languages. You don't need to switch language settings — just type naturally.</p>
+
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="fc-icon" style="background:linear-gradient(135deg,#ef4444,#f97316)"><span style="font-size:16px">🇬🇧</span></div>
+        <h4>English</h4>
+        <p><code>send 1 SOL to @blockid</code></p>
+      </div>
+      <div class="feat-card">
+        <div class="fc-icon" style="background:linear-gradient(135deg,#ef4444,#fff)"><span style="font-size:16px">🇮🇩</span></div>
+        <h4>Bahasa Indonesia</h4>
+        <p><code>kirim 100 USDC ke @blockid</code></p>
+      </div>
+      <div class="feat-card">
+        <div class="fc-icon" style="background:linear-gradient(135deg,#fff,#ef4444)"><span style="font-size:16px">🇯🇵</span></div>
+        <h4>日本語</h4>
+        <p><code>1 SOL を @blockid に送って</code></p>
+      </div>
+      <div class="feat-card">
+        <div class="fc-icon" style="background:linear-gradient(135deg,#ef4444,#fbbf24)"><span style="font-size:16px">🇨🇳</span></div>
+        <h4>中文</h4>
+        <p><code>发送 1 SOL 给 @blockid</code></p>
+      </div>
+      <div class="feat-card">
+        <div class="fc-icon" style="background:linear-gradient(135deg,#3b82f6,#ef4444)"><span style="font-size:16px">🇰🇷</span></div>
+        <h4>한국어</h4>
+        <p><code>@blockid에게 1 SOL 보내줘</code></p>
+      </div>
+      <div class="feat-card">
+        <div class="fc-icon" style="background:linear-gradient(135deg,#ef4444,#fbbf24)"><span style="font-size:16px">🇪🇸</span></div>
+        <h4>Español</h4>
+        <p><code>enviar 1 SOL a @blockid</code></p>
+      </div>
+      <div class="feat-card">
+        <div class="fc-icon" style="background:linear-gradient(135deg,#22c55e,#fff)"><span style="font-size:16px">🇸🇦</span></div>
+        <h4>العربية</h4>
+        <p><code>أرسل 1 SOL إلى @blockid</code></p>
+      </div>
+      <div class="feat-card">
+        <div class="fc-icon" style="background:linear-gradient(135deg,#7c3aed,#38bdf8)"><span style="font-size:16px">🗣️</span></div>
+        <h4>Slang &amp; Casual</h4>
+        <p><code>gas 1 sol ke @blockid</code></p>
+      </div>
+    </div>
+
+    <h2>Auto-Swap via Jupiter</h2>
+    <p>If you're holding SOL but want to send USDC (or vice versa), Smart Router automatically routes through <strong>Jupiter Aggregator</strong> for the best swap rate. You see the fee breakdown before confirming — no hidden costs.</p>
+    <ul>
+      <li><strong>Same token</strong> — direct transfer, minimal fee (~0.000005 SOL)</li>
+      <li><strong>Different token</strong> — auto-swap via Jupiter, ~0.3% swap fee + network fee</li>
+      <li><strong>Slippage protection</strong> — default 0.5%, adjustable</li>
+    </ul>
+
+    <h2>Trust Score Integration</h2>
+    <p>Before every transaction, Smart Router shows the recipient's <strong>trust score and risk level</strong>. If the recipient has a high-risk score, you'll see a prominent warning — protecting you from sending funds to potentially malicious wallets.</p>
+
+    <div class="score-visual">
+      <div class="score-ring" style="border-color:#ef4444;color:#ef4444;box-shadow:0 0 20px -4px rgba(239,68,68,0.4)">12</div>
+      <div class="score-detail">
+        <h4 style="color:#ef4444">⚠️ High Risk Wallet Detected</h4>
+        <p>This wallet has been flagged with multiple risk indicators. Proceed with extreme caution.</p>
+      </div>
+    </div>
   </section>
 
 </div>
