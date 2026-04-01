@@ -42,6 +42,7 @@
 
 html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 24px)}
 body{background:var(--bg);color:var(--fg);font-family:var(--fm);font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 
 .grad-text{background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
@@ -211,6 +212,8 @@ p code, li code{background:rgba(56,189,248,.08);color:var(--blue);padding:2px 7p
 </style>
 </head>
 <body>
+
+<canvas id="bg-canvas"></canvas>
 
 <!-- NAV -->
 <nav>
@@ -752,6 +755,46 @@ p code, li code{background:rgba(56,189,248,.08);color:var(--blue);padding:2px 7p
   },{threshold:.05});
   document.querySelectorAll('.reveal').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity .6s ease,transform .6s ease';obs.observe(el)});
   document.querySelectorAll('.reveal.visible').forEach(el=>{el.style.opacity='1';el.style.transform='none'});
+})();
+</script>
+<script>
+(function(){
+  const c=document.getElementById('bg-canvas'),ctx=c.getContext('2d');
+  let W,H,pts,mx=-9999,my=-9999;
+  const trail=[];
+  const TRAIL_LEN=120;
+  const TRAIL_LIFE=900;
+  const resize=()=>{W=c.width=innerWidth;H=c.height=innerHeight};
+  const rand=(a,b)=>Math.random()*(b-a)+a;
+  const init=()=>{pts=Array.from({length:Math.floor(W*H/12000)},()=>({x:rand(0,W),y:rand(0,H),vx:rand(-.18,.18),vy:rand(-.18,.18),r:rand(.8,2.2),a:rand(.08,.4),col:Math.random()>.55?'56,189,248':'124,58,237'}))};
+  const drawGrid=()=>{const s=60,sc=scrollY*.04;ctx.strokeStyle='rgba(56,189,248,0.02)';ctx.lineWidth=1;ctx.beginPath();for(let x=sc%s;x<W;x+=s){ctx.moveTo(x,0);ctx.lineTo(x,H)}for(let y=sc%s;y<H;y+=s){ctx.moveTo(0,y);ctx.lineTo(W,y)}ctx.stroke()};
+  const drawOrbs=()=>{const t=Date.now()/4000;[{x:W*.2,y:H*.3,r:320,c:'124,58,237',a:.05+.018*Math.sin(t)},{x:W*.8,y:H*.6,r:280,c:'56,189,248',a:.04+.015*Math.sin(t+1.5)},{x:W*.5,y:H*.85,r:200,c:'129,140,248',a:.028+.01*Math.sin(t+3)}].forEach(o=>{const g=ctx.createRadialGradient(o.x,o.y,0,o.x,o.y,o.r);g.addColorStop(0,`rgba(${o.c},${o.a})`);g.addColorStop(1,`rgba(${o.c},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(o.x,o.y,o.r,0,Math.PI*2);ctx.fill()})};
+  const drawPts=()=>{pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;const dx=p.x-mx,dy=p.y-my,d=Math.sqrt(dx*dx+dy*dy);if(d<110){const f=(110-d)/110*.5;p.x+=dx/d*f;p.y+=dy/d*f}ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(${p.col},${p.a})`;ctx.fill()});for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<90){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(56,189,248,${.05*(1-d/90)})`;ctx.lineWidth=.5;ctx.stroke()}}};
+  const drawTrail=()=>{
+    const now=Date.now();
+    while(trail.length>0&&now-trail[0].t>TRAIL_LIFE)trail.shift();
+    if(trail.length<2)return;
+    ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
+    for(let i=1;i<trail.length;i++){
+      const p0=trail[i-1],p1=trail[i];
+      const age=now-p1.t;const life=Math.max(0,1-age/TRAIL_LIFE);
+      const ratio=i/trail.length;const alpha=life*ratio*0.95;
+      if(alpha<0.005)continue;
+      const w=0.5+ratio*2.2;
+      const r=Math.round(124+(14-124)*ratio);
+      const g2=Math.round(58+(165-58)*ratio);
+      const b=Math.round(237+(233-237)*ratio);
+      ctx.beginPath();ctx.moveTo(p0.x,p0.y);ctx.lineTo(p1.x,p1.y);
+      ctx.shadowColor=`rgba(${r},${g2},${b},${alpha})`;ctx.shadowBlur=14+ratio*14;
+      ctx.strokeStyle=`rgba(${r},${g2},${b},${alpha})`;ctx.lineWidth=w;ctx.stroke();
+      ctx.shadowBlur=3;ctx.strokeStyle=`rgba(255,255,255,${alpha*0.4*ratio})`;ctx.lineWidth=w*0.28;ctx.stroke();
+    }
+    ctx.restore();
+  };
+  const loop=()=>{ctx.clearRect(0,0,W,H);drawGrid();drawOrbs();drawPts();drawTrail();requestAnimationFrame(loop)};
+  window.addEventListener('resize',()=>{resize();init()});
+  window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;trail.push({x:mx,y:my,t:Date.now()});if(trail.length>TRAIL_LEN)trail.shift()},{passive:true});
+  resize();init();loop()
 })();
 </script>
 </body>
